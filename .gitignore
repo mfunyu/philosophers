@@ -1,0 +1,8 @@
+*
+!*/
+!Makefile
+!*.h
+!*.c
+!*.sh
+!.gitignore
+!.gitkeep
