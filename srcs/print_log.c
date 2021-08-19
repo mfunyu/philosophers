@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_log.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/18 00:02:24 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/08/19 23:36:32 by mfunyu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philosophers.h"
+
+int64_t	print_log(t_info *info)
+{
+	struct timeval	tv;
+	char			*status;
+	int64_t			timestamp_in_ms;
+
+	if (info->action == Fork)
+		status = "has taken a fork";
+	else if (info->action == Eat)
+		status = "is eating";
+	else if (info->action == Sleep)
+		status = "is sleeping";
+	else if (info->action == Think)
+		status = "is thinking";
+	else if (info->action == Die)
+		status = "died";
+	if (gettimeofday(&tv, NULL))
+		return (error_return("gettimeofday failed"));
+	timestamp_in_ms = (int64_t)(tv.tv_sec * 1000 + tv.tv_usec / 1000.0);
+	printf("%lld %d %s\n", timestamp_in_ms, info->who, status);
+	return (timestamp_in_ms);
+}
