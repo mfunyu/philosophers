@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/08/20 22:36:14 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/08/21 00:14:49 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,22 +23,22 @@ CC		:= gcc
 CFLAGS	:= -Wall -Wextra -Werror $(INCLUDES)
 GFLAGS	:= $(CFLAGS) -fsanitize=address
 
-.PHONY	: all clean fclean re dbg leak leak_Darwin leak_Linux norm
+.PHONY	: all clean fclean re dbg leak leak_Darwin leak_Linux norm test help
 
-all		: $(NAME)
+all	: $(NAME) ## Compile all
 
 $(NAME)	: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-clean	:
+clean	: ## Remove object files
 	$(RM) $(OBJS)
 
-fclean	: clean
+fclean	: clean ## Remove target files
 	$(RM) $(NAME)
 
-re		: fclean all
+re	: fclean all ## Run fclean all
 
-dbg		: $(OBJS)
+dbg	: $(OBJS) ## Run with -fsanitize=address
 	$(CC) $(GFLAGS) $(OBJS) -o $(NAME)
 
 leak_Linux	: dbg
@@ -46,10 +46,14 @@ leak_Linux	: dbg
 leak_Darwin	: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(DSTRCTR) -o $(NAME)
 
-leak	: leak_$(shell uname)
+leak	: leak_$(shell uname) ## Run leak check
 
-norm	:
+norm	: ## Run norm check
 	./tests/norm.sh
 
-test	:
+test	: ## Run all test scripts
 	./tests/test.sh
+
+help	: ## Display this help screen
+	@grep -E '^[a-zA-Z_-]+.*:.*?## .*$$' $(MAKEFILE_LIST) \
+	| awk 'BEGIN {FS = "\t:.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
