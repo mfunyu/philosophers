@@ -6,13 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/20 22:45:00 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/21 00:49:53 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	take_fork(t_info *info, int left)
+int	take_fork(t_info *info, int left)
 {
 	int			hand;
 	int64_t		ret_time;
@@ -23,7 +23,7 @@ void	take_fork(t_info *info, int left)
 	if (info->is_start && info->who % 2)
 		usleep(200);
 	info->action = -1;
-	while (info->action != Fork)
+	while (info->action != Fork && !*(info->someone_died))
 	{
 		pthread_mutex_lock(&(info->data->mutex));
 		if (info->data->forks[hand] == 0)
@@ -37,6 +37,9 @@ void	take_fork(t_info *info, int left)
 		pthread_mutex_unlock(&(info->data->mutex));
 	}
 	info->is_start = 0;
+	if (*(info->someone_died))
+		return (1);
+	return (0);
 	// printf("who: %d hand: %d fork: %d\n", info->who, left, info->action);
 }
 
@@ -72,10 +75,12 @@ void	*philo_thread(void *arg)
 	t_info		*info;
 
 	info = (t_info *)arg;
-	while (1)
+	while (1 && !*(info->someone_died))
 	{
-		take_fork(info, false);
-		take_fork(info, true);
+		if (take_fork(info, false))
+			return (NULL);
+		if (take_fork(info, true))
+			return (NULL);
 		simple_action(Eat, info->data->time_to_eat, info);
 		drop_fork(info);
 		simple_action(Sleep, info->data->time_to_sleep, info);
