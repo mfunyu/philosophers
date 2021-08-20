@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 22:35:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/20 00:48:15 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/20 22:43:54 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_death(t_info *info)
 		if (*(info->someone_died) == 1)
 			return (0);
 		if (info->last_meal != 0
-			&& now - info->last_meal >= info->data->philo->time_to_die / 1000)
+			&& now - info->last_meal >= info->data->time_to_die / 1000)
 		{
 			info->action = Die;
 			*(info->someone_died) = 1;

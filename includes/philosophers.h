@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/20 00:30:16 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/20 22:41:10 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,6 @@
 # define SUCCESS 0
 # define ERROR 1
 
-typedef struct s_philo
-{
-	int		nb_of_philos;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		must_eat;
-}				t_philo;
-
 typedef enum e_action
 {
 	Fork,
@@ -47,8 +38,12 @@ typedef enum e_action
 typedef struct s_shared
 {
 	pthread_mutex_t	mutex;
-	t_philo			*philo;
 	int				*forks;
+	int				nb_of_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				must_eat;
 }				t_shared;
 
 typedef struct s_info

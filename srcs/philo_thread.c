@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/20 00:13:09 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/20 22:45:00 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	take_fork(t_info *info, int left)
 	int64_t		ret_time;
 
 	hand = info->who - left;
-	if (!left && info->who == info->data->philo->nb_of_philos)
+	if (!left && info->who == info->data->nb_of_philos)
 		hand = 0;
 	if (info->is_start && info->who % 2)
 		usleep(200);
@@ -47,7 +47,7 @@ void	drop_fork(t_info *info)
 
 	right = info->who;
 	left = right - 1;
-	if (info->who == info->data->philo->nb_of_philos)
+	if (info->who == info->data->nb_of_philos)
 		right = 0;
 	pthread_mutex_lock(&(info->data->mutex));
 	info->data->forks[right] = 0;
@@ -76,9 +76,9 @@ void	*philo_thread(void *arg)
 	{
 		take_fork(info, false);
 		take_fork(info, true);
-		simple_action(Eat, info->data->philo->time_to_eat, info);
+		simple_action(Eat, info->data->time_to_eat, info);
 		drop_fork(info);
-		simple_action(Sleep, info->data->philo->time_to_sleep, info);
+		simple_action(Sleep, info->data->time_to_sleep, info);
 		simple_action(Think, 0, info);
 	}
 	return (NULL);
