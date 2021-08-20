@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/20 22:45:52 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/20 22:55:33 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,17 @@ int	parse_args(t_shared *shared, int ac, char **av)
 	int		error;
 
 	shared->nb_of_philos = ft_atoi_check(av[1], &error);
+	if (error)
+		return (error_return("Invalid argument"));
 	shared->time_to_die = ft_atoi_check(av[2], &error) * 1000;
+	if (error)
+		return (error_return("Invalid argument"));
 	shared->time_to_eat = ft_atoi_check(av[3], &error) * 1000;
+	if (error)
+		return (error_return("Invalid argument"));
 	shared->time_to_sleep = ft_atoi_check(av[4], &error) * 1000;
+	if (error)
+		return (error_return("Invalid argument"));
 	shared->must_eat = -1;
 	if (ac == 6)
 		shared->must_eat = ft_atoi_check(av[5], &error);
