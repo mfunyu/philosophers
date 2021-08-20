@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/08/17 22:52:25 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/08/20 22:36:14 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,3 +50,6 @@ leak	: leak_$(shell uname)
 
 norm	:
 	./tests/norm.sh
+
+test	:
+	./tests/test.sh
