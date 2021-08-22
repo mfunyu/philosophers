@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/20 22:41:10 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/22 14:50:26 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum e_action
 typedef struct s_shared
 {
 	pthread_mutex_t	mutex;
+	bool			*someone_died;
 	int				*forks;
 	int				nb_of_philos;
 	int				time_to_die;
@@ -50,10 +51,9 @@ typedef struct s_info
 {
 	int				who;
 	int				is_start;
-	int				*someone_died;
 	int64_t			last_meal;
 	t_action		action;
-	t_shared		*data;
+	t_shared		*shared;
 }				t_info;
 
 void	*philo_thread(void *arg);

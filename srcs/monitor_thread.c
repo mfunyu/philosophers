@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 22:35:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/21 00:55:59 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/22 14:51:17 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	check_death(t_info *info)
 		if (gettimeofday(&tv, NULL))
 			return (error_return("gettimeofday failed"));
 		now = (int64_t)(tv.tv_sec * 1000 + tv.tv_usec / 1000.0);
-		if (*(info->someone_died) == 1)
+		if (*(info->shared->someone_died))
 			return (0);
 		if (info->last_meal != 0
-			&& now - info->last_meal >= info->data->time_to_die / 1000)
+			&& now - info->last_meal >= info->shared->time_to_die / 1000)
 		{
-			pthread_mutex_lock(&(info->data->mutex));
-			*(info->someone_died) = 1;
+			pthread_mutex_lock(&(info->shared->mutex));
+			*(info->shared->someone_died) = true;
 			info->action = Die;
 			print_log(info);
 			return (0);

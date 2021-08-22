@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/22 14:44:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/22 14:50:56 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,24 @@ int	parse_args(t_shared *shared, int ac, char **av)
 
 int	init_t_shared(t_shared *shared)
 {
-	int		num_forks;
+	bool	someone_died;
 
-	pthread_mutex_init(&(shared->mutex), NULL);
-	num_forks = shared->nb_of_philos;
-	shared->forks = (int *)malloc((num_forks + 1) * sizeof(int));
+	someone_died = false;
+	shared->someone_died = &someone_died;
+	shared->forks = (int *)malloc((shared->nb_of_philos + 1) * sizeof(int));
 	if (!shared->forks)
 		return (error_return("malloc failed"));
-	memset(shared->forks, 0, num_forks + 1);
+	memset(shared->forks, 0, shared->nb_of_philos + 1);
 	return (0);
 }
 
-void	init_t_info(t_info *info, int who, t_shared *shared, int *someone_died)
+void	init_t_info(t_info *info, int who, t_shared *shared)
 {
 	info->who = who;
-	info->someone_died = someone_died;
 	info->is_start = 1;
 	info->last_meal = 0;
 	info->action = -1;
-	info->data = shared;
+	info->shared = shared;
 }
 
 int	start_threads(t_shared *shared)
@@ -60,9 +59,7 @@ int	start_threads(t_shared *shared)
 	int			j;
 	void		*ret_val;
 	void		**func;
-	int			someone_died;
 
-	someone_died = 0;
 	threads = (pthread_t *)malloc((shared->nb_of_philos * 2 + 1) * sizeof(pthread_t));
 	info = (t_info *)malloc((shared->nb_of_philos + 1 + 1) * sizeof(t_info));
 	func = (void **)malloc(2 * sizeof(void *));
@@ -71,7 +68,7 @@ int	start_threads(t_shared *shared)
 	i = 1;
 	while (i <= shared->nb_of_philos)
 	{
-		init_t_info(info + i, i, shared, &someone_died);
+		init_t_info(info + i, i, shared);
 		j = 0;
 		while (j < 2)
 		{
@@ -82,7 +79,7 @@ int	start_threads(t_shared *shared)
 		}
 		i++;
 	}
-	init_t_info(info + i, i, shared, &someone_died);
+	init_t_info(info + i, i, shared);
 	if (pthread_create(threads + i * 2, NULL, monitor_end_thread, info + i))
 		return (error_return("thread creation failed"));
 	pthread_join(threads[i * 2], &ret_val);
@@ -94,10 +91,12 @@ int	start_threads(t_shared *shared)
 int	philosophers(int ac, char **av)
 {
 	t_shared	shared;
+
 	if (parse_args(&shared, ac, av))
 		return (ERROR);
 	if (init_t_shared(&shared))
 		return (ERROR);
+	pthread_mutex_init(&(shared.mutex), NULL);
 	if (start_threads(&shared))
 		return (ERROR);
 	pthread_mutex_destroy(&(shared.mutex));
