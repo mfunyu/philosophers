@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/20 22:55:33 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/22 14:44:22 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,11 @@ int	parse_args(t_shared *shared, int ac, char **av)
 {
 	int		error;
 
+	error = 0;
 	shared->nb_of_philos = ft_atoi_check(av[1], &error);
-	if (error)
-		return (error_return("Invalid argument"));
 	shared->time_to_die = ft_atoi_check(av[2], &error) * 1000;
-	if (error)
-		return (error_return("Invalid argument"));
 	shared->time_to_eat = ft_atoi_check(av[3], &error) * 1000;
-	if (error)
-		return (error_return("Invalid argument"));
 	shared->time_to_sleep = ft_atoi_check(av[4], &error) * 1000;
-	if (error)
-		return (error_return("Invalid argument"));
 	shared->must_eat = -1;
 	if (ac == 6)
 		shared->must_eat = ft_atoi_check(av[5], &error);
@@ -59,46 +52,54 @@ void	init_t_info(t_info *info, int who, t_shared *shared, int *someone_died)
 	info->data = shared;
 }
 
-int	philosophers(int ac, char **av)
+int	start_threads(t_shared *shared)
 {
 	t_info		*info;
-	t_shared	shared;
-	pthread_t	*thread;
-	pthread_t	*thread2;
-	int			someone_died;
+	pthread_t	*threads;
 	int			i;
+	int			j;
 	void		*ret_val;
+	void		**func;
+	int			someone_died;
 
 	someone_died = 0;
+	threads = (pthread_t *)malloc((shared->nb_of_philos * 2 + 1) * sizeof(pthread_t));
+	info = (t_info *)malloc((shared->nb_of_philos + 1 + 1) * sizeof(t_info));
+	func = (void **)malloc(2 * sizeof(void *));
+	func[0] = philo_thread;
+	func[1] = monitor_thread;
+	i = 1;
+	while (i <= shared->nb_of_philos)
+	{
+		init_t_info(info + i, i, shared, &someone_died);
+		j = 0;
+		while (j < 2)
+		{
+			if (pthread_create(threads + i * 2 + j, NULL, func[j], info + i))
+				return (error_return("thread creation failed"));
+			pthread_detach(threads[i * 2 + j]);
+			j++;
+		}
+		i++;
+	}
+	init_t_info(info + i, i, shared, &someone_died);
+	if (pthread_create(threads + i * 2, NULL, monitor_end_thread, info + i))
+		return (error_return("thread creation failed"));
+	pthread_join(threads[i * 2], &ret_val);
+	null_free(threads);
+	null_free(info);
+	return (0);
+}
+
+int	philosophers(int ac, char **av)
+{
+	t_shared	shared;
 	if (parse_args(&shared, ac, av))
 		return (ERROR);
 	if (init_t_shared(&shared))
 		return (ERROR);
-	thread = (pthread_t *)malloc((shared.nb_of_philos + 1) * sizeof(pthread_t));
-	thread2 = (pthread_t *)malloc((shared.nb_of_philos + 1 + 1) * sizeof(pthread_t));
-	info = (t_info *)malloc((shared.nb_of_philos + 1 + 1) * sizeof(t_info));
-	i = 1;
-	while (i <= shared.nb_of_philos)
-	{
-		init_t_info(info + i, i, &shared, &someone_died);
-		if (pthread_create(thread + i, NULL, philo_thread, info + i))
-			return (error_return("thread creation failed"));
-		if (pthread_create(thread2 + i, NULL, monitor_thread, info + i))
-			return (error_return("thread creation failed"));
-		pthread_detach(thread[i]);
-		pthread_detach(thread2[i]);
-		i++;
-	}
-	init_t_info(info + i, i, &shared, &someone_died);
-	if (pthread_create(thread2 + i, NULL, monitor_end_thread, info + i))
-		return (error_return("thread creation failed"));
-	pthread_join(thread2[i], &ret_val);
-	// i = 1;
-	// while (i <= philo.nb_of_philos)
-	// 	pthread_join(thread2[i++], &ret_val);
-	null_free(thread);
-	null_free(thread2);
-	null_free(info);
+	if (start_threads(&shared))
+		return (ERROR);
 	pthread_mutex_destroy(&(shared.mutex));
 	return (0);
 }
