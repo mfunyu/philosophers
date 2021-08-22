@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 22:23:58 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/17 23:30:20 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/22 14:20:59 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ int	ft_atoi_check(const char *n, int *error)
 
 	nb = 0;
 	sign = 1;
+	if (*error == ERROR)
+		return (0);
 	*error = ERROR;
 	n = _skip_spaces(n);
 	sign = 1;
 	if (*n == '-' || *n == '+')
-	{
-		sign = 44 - *n;
-		n++;
-	}
+		sign = 44 - *n++;
 	while ('0' <= *n && *n <= '9')
 	{
 		*error = 1;
