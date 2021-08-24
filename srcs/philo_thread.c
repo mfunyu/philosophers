@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/22 14:52:00 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/23 02:11:13 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,34 @@ int	take_fork(t_info *info, int left)
 {
 	int			hand;
 	int64_t		ret_time;
+	t_action	action;
 
+	action = -1;
 	hand = info->who - left;
+	if (*(info->shared->someone_died))
+		return (0);
 	if (!left && info->who == info->shared->nb_of_philos)
 		hand = 0;
 	if (info->is_start && info->who % 2)
 		usleep(200);
-	info->action = -1;
-	while (info->action != Fork && !*(info->shared->someone_died))
+	while (action != FORK && !*(info->shared->someone_died))
 	{
 		pthread_mutex_lock(&(info->shared->mutex));
-		if (info->shared->forks[hand] == 0)
+		if (info->shared->forks[hand] == 0 && !*(info->shared->someone_died))
 		{
 			info->shared->forks[hand] = info->who;
-			info->action = Fork;
-			ret_time = print_log(info);
+			action = FORK;
+			ret_time = print_log(info, FORK);
 			if (info->is_start)
 				info->last_meal = ret_time;
 		}
 		pthread_mutex_unlock(&(info->shared->mutex));
+		usleep(100);
 	}
 	info->is_start = 0;
 	if (*(info->shared->someone_died))
 		return (1);
 	return (0);
-	// printf("who: %d hand: %d fork: %d\n", info->who, left, info->action);
 }
 
 void	drop_fork(t_info *info)
@@ -48,6 +51,8 @@ void	drop_fork(t_info *info)
 	int		right;
 	int		left;
 
+	if (*(info->shared->someone_died))
+		return ;
 	right = info->who;
 	left = right - 1;
 	if (info->who == info->shared->nb_of_philos)
@@ -62,9 +67,10 @@ void	simple_action(t_action action, int time, t_info *info)
 {
 	int64_t		ret;
 
-	info->action = action;
-	ret = print_log(info);
-	if (action == Eat)
+	if (*(info->shared->someone_died))
+		return ;
+	ret = print_log(info, action);
+	if (action == EAT)
 		info->last_meal = ret;
 	if (time)
 		usleep(time);
@@ -75,16 +81,16 @@ void	*philo_thread(void *arg)
 	t_info		*info;
 
 	info = (t_info *)arg;
-	while (1 && !*(info->shared->someone_died))
+	while (!*(info->shared->someone_died))
 	{
 		if (take_fork(info, false))
 			return (NULL);
 		if (take_fork(info, true))
 			return (NULL);
-		simple_action(Eat, info->shared->time_to_eat, info);
+		simple_action(EAT, info->shared->time_to_eat, info);
 		drop_fork(info);
-		simple_action(Sleep, info->shared->time_to_sleep, info);
-		simple_action(Think, 0, info);
+		simple_action(SLEEP, info->shared->time_to_sleep, info);
+		simple_action(THINK, 0, info);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/22 14:50:26 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/22 14:58:59 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 
 typedef enum e_action
 {
-	Fork,
-	Eat,
-	Sleep,
-	Think,
-	Die
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIE
 }			t_action;
 
 typedef struct s_shared
@@ -60,7 +60,7 @@ void	*philo_thread(void *arg);
 void	*monitor_thread(void *arg);
 void	*monitor_end_thread(void *arg);
 
-int64_t	print_log(t_info *info);
+int64_t	print_log(t_info *info, t_action action);
 
 /*
 ** error

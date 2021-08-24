@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/22 14:50:56 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/24 23:35:52 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,27 @@ void	init_t_info(t_info *info, int who, t_shared *shared)
 	info->who = who;
 	info->is_start = 1;
 	info->last_meal = 0;
-	info->action = -1;
 	info->shared = shared;
 }
 
-int	start_threads(t_shared *shared)
+int	create_philo_monitor_thread(pthread_t *threads, t_info *info, t_shared *shared)
 {
-	t_info		*info;
-	pthread_t	*threads;
+	void		*func;
 	int			i;
 	int			j;
 	void		*ret_val;
-	void		**func;
 
-	threads = (pthread_t *)malloc((shared->nb_of_philos * 2 + 1) * sizeof(pthread_t));
-	info = (t_info *)malloc((shared->nb_of_philos + 1 + 1) * sizeof(t_info));
-	func = (void **)malloc(2 * sizeof(void *));
-	func[0] = philo_thread;
-	func[1] = monitor_thread;
-	i = 1;
-	while (i <= shared->nb_of_philos)
+	i = 0;
+	while (i < shared->nb_of_philos)
 	{
-		init_t_info(info + i, i, shared);
+		init_t_info(info + i, i + 1, shared);
 		j = 0;
 		while (j < 2)
 		{
-			if (pthread_create(threads + i * 2 + j, NULL, func[j], info + i))
+			func = philo_thread;
+			if (j == 1)
+				func = monitor_thread;
+			if (pthread_create(threads + i * 2 + j, NULL, func, info + i))
 				return (error_return("thread creation failed"));
 			pthread_detach(threads[i * 2 + j]);
 			j++;
@@ -83,8 +78,24 @@ int	start_threads(t_shared *shared)
 	if (pthread_create(threads + i * 2, NULL, monitor_end_thread, info + i))
 		return (error_return("thread creation failed"));
 	pthread_join(threads[i * 2], &ret_val);
-	null_free(threads);
-	null_free(info);
+	return (0);
+}
+
+int	start_threads(t_shared *shared)
+{
+	t_info		*info;
+	t_info		*infohead;
+	pthread_t	*threads;
+	pthread_t	*threadshead;
+
+	threads = (pthread_t *)malloc((shared->nb_of_philos * 2 + 1) * sizeof(pthread_t));
+	info = (t_info *)malloc((shared->nb_of_philos + 1 + 1) * sizeof(t_info));
+	threadshead = threads;
+	infohead = info;
+	if (create_philo_monitor_thread(threads, info, shared))
+		return (ERROR);
+	null_free(threadshead);
+	null_free(infohead);
 	return (0);
 }
 

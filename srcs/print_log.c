@@ -6,27 +6,29 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 00:02:24 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/19 23:36:32 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/23 01:57:59 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int64_t	print_log(t_info *info)
+int64_t	print_log(t_info *info, t_action action)
 {
 	struct timeval	tv;
 	char			*status;
 	int64_t			timestamp_in_ms;
 
-	if (info->action == Fork)
+	if (*(info->shared->someone_died) && action != DIE)
+		return (0);
+	if (action == FORK)
 		status = "has taken a fork";
-	else if (info->action == Eat)
+	else if (action == EAT)
 		status = "is eating";
-	else if (info->action == Sleep)
+	else if (action == SLEEP)
 		status = "is sleeping";
-	else if (info->action == Think)
+	else if (action == THINK)
 		status = "is thinking";
-	else if (info->action == Die)
+	else if (action == DIE)
 		status = "died";
 	if (gettimeofday(&tv, NULL))
 		return (error_return("gettimeofday failed"));
