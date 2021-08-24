@@ -6,24 +6,20 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/23 02:11:13 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/24 23:51:32 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	take_fork(t_info *info, int left)
+int	take_fork(t_info *info, int hand)
 {
-	int			hand;
 	int64_t		ret_time;
 	t_action	action;
 
 	action = -1;
-	hand = info->who - left;
 	if (*(info->shared->someone_died))
 		return (0);
-	if (!left && info->who == info->shared->nb_of_philos)
-		hand = 0;
 	if (info->is_start && info->who % 2)
 		usleep(200);
 	while (action != FORK && !*(info->shared->someone_died))
@@ -38,11 +34,30 @@ int	take_fork(t_info *info, int left)
 				info->last_meal = ret_time;
 		}
 		pthread_mutex_unlock(&(info->shared->mutex));
-		usleep(100);
 	}
 	info->is_start = 0;
 	if (*(info->shared->someone_died))
 		return (1);
+	return (0);
+}
+
+int	take_right_fork(t_info *info)
+{
+	int		right_hand;
+
+	right_hand = info->who;
+	take_fork(info, right_hand);
+	return (0);
+}
+
+int	take_left_fork(t_info *info)
+{
+	int		left_hand;
+
+	left_hand = info->who - 1;
+	if (info->who == info->shared->nb_of_philos)
+		left_hand = 0;
+	take_fork(info, left_hand);
 	return (0);
 }
 
@@ -83,9 +98,9 @@ void	*philo_thread(void *arg)
 	info = (t_info *)arg;
 	while (!*(info->shared->someone_died))
 	{
-		if (take_fork(info, false))
+		if (take_right_fork(info))
 			return (NULL);
-		if (take_fork(info, true))
+		if (take_left_fork(info))
 			return (NULL);
 		simple_action(EAT, info->shared->time_to_eat, info);
 		drop_fork(info);
