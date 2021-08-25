@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/25 23:12:51 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/25 23:41:50 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,41 +52,33 @@ void	init_t_info(t_info *info, int who, t_shared *shared)
 
 int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
 {
-	void		*func;
 	int			i;
-	int			j;
+	pthread_t	end_thread;
 	void		*ret_val;
 
 	i = 0;
 	while (i < shared->nb_of_philos)
 	{
-		init_t_info(info + i, i + 1, shared);
-		j = 0;
-		while (j < 2)
-		{
-			func = philo_thread;
-			if (j == 1)
-				func = monitor_thread;
-			if (pthread_create(threads + i * 2 + j, NULL, func, info + i))
-				return (error_return("thread creation failed"));
-			pthread_detach(threads[i * 2 + j]);
-			j++;
-		}
-		i++;
+		init_t_info(info, ++i, shared);
+		if (pthread_create(threads, NULL, philo_thread, info))
+			return (error_return("thread creation failed"));
+		pthread_detach(*threads++);
+		if (pthread_create(threads, NULL, monitor_thread, info++))
+			return (error_return("thread creation failed"));
+		pthread_detach(*threads++);
 	}
-	init_t_info(info + i, i, shared);
-	if (pthread_create(threads + i * 2, NULL, monitor_end_thread, info + i))
+	if (pthread_create(&end_thread, NULL, monitor_end_thread, shared))
 		return (error_return("thread creation failed"));
-	pthread_join(threads[i * 2], &ret_val);
+	pthread_join(end_thread, &ret_val);
 	return (0);
 }
 
 int	init_threads(pthread_t **threads, t_info **info, t_shared *shared)
 {
-	*threads = (pthread_t *)malloc((shared->nb_of_philos * 2 + 1) * sizeof(pthread_t));
+	*threads = (pthread_t *)malloc((shared->nb_of_philos * 2) * sizeof(pthread_t));
 	if (!*threads)
 		return (error_return("malloc failed"));
-	*info = (t_info *)malloc((shared->nb_of_philos + 1 + 1) * sizeof(t_info));
+	*info = (t_info *)malloc((shared->nb_of_philos) * sizeof(t_info));
 	if (!*info)
 	{
 		null_free(*threads);
