@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/24 23:35:52 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/25 23:12:51 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_t_info(t_info *info, int who, t_shared *shared)
 	info->shared = shared;
 }
 
-int	create_philo_monitor_thread(pthread_t *threads, t_info *info, t_shared *shared)
+int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
 {
 	void		*func;
 	int			i;
@@ -81,35 +81,38 @@ int	create_philo_monitor_thread(pthread_t *threads, t_info *info, t_shared *shar
 	return (0);
 }
 
-int	start_threads(t_shared *shared)
+int	init_threads(pthread_t **threads, t_info **info, t_shared *shared)
 {
-	t_info		*info;
-	t_info		*infohead;
-	pthread_t	*threads;
-	pthread_t	*threadshead;
-
-	threads = (pthread_t *)malloc((shared->nb_of_philos * 2 + 1) * sizeof(pthread_t));
-	info = (t_info *)malloc((shared->nb_of_philos + 1 + 1) * sizeof(t_info));
-	threadshead = threads;
-	infohead = info;
-	if (create_philo_monitor_thread(threads, info, shared))
-		return (ERROR);
-	null_free(threadshead);
-	null_free(infohead);
+	*threads = (pthread_t *)malloc((shared->nb_of_philos * 2 + 1) * sizeof(pthread_t));
+	if (!*threads)
+		return (error_return("malloc failed"));
+	*info = (t_info *)malloc((shared->nb_of_philos + 1 + 1) * sizeof(t_info));
+	if (!*info)
+	{
+		null_free(*threads);
+		return (error_return("malloc failed"));
+	}
 	return (0);
 }
 
 int	philosophers(int ac, char **av)
 {
 	t_shared	shared;
+	t_info		*info;
+	pthread_t	*threads;
 
 	if (parse_args(&shared, ac, av))
 		return (ERROR);
 	if (init_t_shared(&shared))
 		return (ERROR);
 	pthread_mutex_init(&(shared.mutex), NULL);
-	if (start_threads(&shared))
+	if (init_threads(&threads, &info, &shared))
 		return (ERROR);
+	if (start_threads(threads, info, &shared))
+		return (ERROR);
+	null_free(shared.forks);
+	null_free(info);
+	null_free(threads);
 	pthread_mutex_destroy(&(shared.mutex));
 	return (0);
 }
