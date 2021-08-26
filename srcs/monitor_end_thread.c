@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 00:24:15 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/23 01:56:51 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/26 23:11:21 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	*monitor_end_thread(void *arg)
 {
-	t_info	*info;
+	t_shared	*shared;
 
-	info = (t_info *)arg;
-	while (!*(info->shared->someone_died))
-	{ ; }
-	printf("end detected\n");
+	shared = (t_shared *)arg;
+	while (!death_detected(shared))
+	 ;
 	return (NULL);
 }
