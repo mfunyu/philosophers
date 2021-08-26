@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/22 14:58:59 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/26 23:33:59 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	*philo_thread(void *arg);
 void	*monitor_thread(void *arg);
 void	*monitor_end_thread(void *arg);
 
+int		take_forks(t_info *info);
 int64_t	print_log(t_info *info, t_action action);
+bool	death_detected(t_shared *shared);
+int		exec_func_in_mutex(t_info *info, int arg, int func(t_info *, int));
 
 /*
 ** error
