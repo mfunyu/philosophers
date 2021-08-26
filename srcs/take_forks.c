@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/26 23:25:41 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/26 23:30:44 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	take_a_fork(t_info *info, int hand)
 		timestamp = print_log(info, FORK);
 		if (info->is_start)
 			info->last_meal = timestamp;
+		return (1);
 	}
 	return (0);
 }
