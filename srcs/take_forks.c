@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 13:41:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 16:15:22 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int	take_a_fork(t_info *info, int hand)
 		return (0);
 	if (info->shared->forks[hand] == 0)
 	{
+		pthread_mutex_lock(&(info->shared->mutex_forks[hand]));
 		info->shared->forks[hand] = info->who;
 		timestamp = print_log(info, FORK);
+		pthread_mutex_unlock(&(info->shared->mutex_forks[hand]));
 		if (info->is_start)
 			info->last_meal = timestamp;
 		return (1);
@@ -36,7 +38,7 @@ int	wait_a_fork(t_info *info, int hand)
 	got_a_fork = false;
 	while (!death_detected(info->shared) && !got_a_fork)
 	{
-		got_a_fork = exec_func_in_mutex(info, hand, take_a_fork);
+		got_a_fork = take_a_fork(info, hand);
 	}
 	return (0);
 }

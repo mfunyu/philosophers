@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/25 23:41:50 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 15:34:05 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int	philosophers(int ac, char **av)
 		return (ERROR);
 	if (init_t_shared(&shared))
 		return (ERROR);
-	pthread_mutex_init(&(shared.mutex), NULL);
+	if (init_mutexes(&shared))
+		return (ERROR);
 	if (init_threads(&threads, &info, &shared))
 		return (ERROR);
 	if (start_threads(threads, info, &shared))
@@ -105,7 +106,6 @@ int	philosophers(int ac, char **av)
 	null_free(shared.forks);
 	null_free(info);
 	null_free(threads);
-	pthread_mutex_destroy(&(shared.mutex));
 	return (0);
 }
 

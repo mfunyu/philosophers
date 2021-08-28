@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 14:26:26 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 15:52:37 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ void	drop_fork_and_sleep(t_info *info)
 	left = right - 1;
 	if (info->who == info->shared->nb_of_philos)
 		right = 0;
-	pthread_mutex_lock(&(info->shared->mutex));
+	pthread_mutex_lock(&(info->shared->mutex_forks[right]));
 	info->shared->forks[right] = 0;
+	pthread_mutex_unlock(&(info->shared->mutex_forks[right]));
+	pthread_mutex_lock(&(info->shared->mutex_forks[left]));
 	info->shared->forks[left] = 0;
+	pthread_mutex_unlock(&(info->shared->mutex_forks[left]));
 	print_log(info, SLEEP);
-	pthread_mutex_unlock(&(info->shared->mutex));
 	usleep(info->shared->time_to_sleep);
 }
 

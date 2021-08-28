@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 00:02:24 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 15:15:03 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 15:51:12 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int64_t	print_log(t_info *info, t_action action)
 	if (gettimeofday(&tv, NULL))
 		return (error_return("gettimeofday failed"));
 	timestamp_in_ms = (int64_t)(tv.tv_sec * 1000 + tv.tv_usec / 1000.0);
+	pthread_mutex_lock(&(info->shared->mutex_print));
 	printf("%"PRId64" %d %s\n", timestamp_in_ms, info->who, status);
+	pthread_mutex_unlock(&(info->shared->mutex_print));
 	return (timestamp_in_ms);
 }

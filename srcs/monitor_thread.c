@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 22:35:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/26 23:26:55 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 16:14:31 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	check_death(t_info *info)
 		if (info->last_meal != 0
 			&& now - info->last_meal >= info->shared->time_to_die / 1000)
 		{
-			pthread_mutex_lock(&(info->shared->mutex));
+			pthread_mutex_lock(&(info->shared->mutex_eat));
 			if (!death_detected(info->shared))
 			{
 				*(info->shared->someone_died) = true;
 				print_log(info, DIE);
 			}
-			pthread_mutex_unlock(&(info->shared->mutex));
+			pthread_mutex_unlock(&(info->shared->mutex_eat));
 			return (0);
 		}
 	}

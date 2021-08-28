@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_func_in_mutex.c                               :+:      :+:    :+:   */
+/*   init_mutexes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 16:00:17 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/08/28 15:50:15 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	exec_func_in_mutex(t_info *info, int arg, int func(t_info *, int))
+int	init_mutexes(t_shared *shared)
 {
-	int		ret;
+	int		i;
 
-	ret = 0;
-	if (death_detected(info->shared))
-		return (0);
-	pthread_mutex_lock(&(info->shared->mutex_forks[arg]));
-	ret = (*func)(info, arg);
-	pthread_mutex_unlock(&(info->shared->mutex_forks[arg]));
-	return (ret);
+	shared->mutex_forks = (pthread_mutex_t *)malloc(
+			(shared->nb_of_philos + 1) * sizeof(pthread_mutex_t));
+	if (!shared->mutex_forks)
+		return (error_return("malloc failed"));
+	i = 0;
+	while (i++ < shared->nb_of_philos)
+		pthread_mutex_init(shared->mutex_forks + i, NULL);
+	pthread_mutex_init(&(shared->mutex_eat), NULL);
+	pthread_mutex_init(&(shared->mutex_print), NULL);
+	return (0);
 }
