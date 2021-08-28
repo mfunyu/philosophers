@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 23:10:26 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 23:41:07 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,6 @@ int	parse_args(t_shared *shared, int ac, char **av)
 	return (0);
 }
 
-int	init_t_shared(t_shared *shared)
-{
-	bool	someone_died;
-
-	someone_died = false;
-	shared->someone_died = &someone_died;
-	shared->forks = (int *)malloc((shared->nb_of_philos + 1) * sizeof(int));
-	if (!shared->forks)
-		return (error_return("malloc failed"));
-	memset(shared->forks, 0, shared->nb_of_philos + 1);
-	return (0);
-}
-
-void	init_t_info(t_info *info, int who, t_shared *shared)
-{
-	info->who = who;
-	info->is_start = 1;
-	info->last_meal = 0;
-	info->shared = shared;
-}
-
 int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
 {
 	int			i;
@@ -70,27 +49,6 @@ int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
 	if (pthread_create(&end_thread, NULL, monitor_end_thread, shared))
 		return (error_return("thread creation failed"));
 	pthread_join(end_thread, &ret_val);
-	return (0);
-}
-
-int	init_threads(pthread_t **threads, t_info **info, t_shared *shared)
-{
-	*threads = (pthread_t *)malloc(
-			(shared->nb_of_philos * 2) * sizeof(pthread_t));
-	if (!*threads)
-	{
-		null_free(shared->forks);
-		null_free(shared->mutex_forks);
-		return (error_return("malloc failed"));
-	}
-	*info = (t_info *)malloc((shared->nb_of_philos) * sizeof(t_info));
-	if (!*info)
-	{
-		null_free(shared->forks);
-		null_free(shared->mutex_forks);
-		null_free(*threads);
-		return (error_return("malloc failed"));
-	}
 	return (0);
 }
 
