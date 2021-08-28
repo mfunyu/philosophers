@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 15:34:05 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 23:10:26 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,19 @@ int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
 
 int	init_threads(pthread_t **threads, t_info **info, t_shared *shared)
 {
-	*threads = (pthread_t *)malloc((shared->nb_of_philos * 2) * sizeof(pthread_t));
+	*threads = (pthread_t *)malloc(
+			(shared->nb_of_philos * 2) * sizeof(pthread_t));
 	if (!*threads)
+	{
+		null_free(shared->forks);
+		null_free(shared->mutex_forks);
 		return (error_return("malloc failed"));
+	}
 	*info = (t_info *)malloc((shared->nb_of_philos) * sizeof(t_info));
 	if (!*info)
 	{
+		null_free(shared->forks);
+		null_free(shared->mutex_forks);
 		null_free(*threads);
 		return (error_return("malloc failed"));
 	}
@@ -104,8 +111,9 @@ int	philosophers(int ac, char **av)
 	if (start_threads(threads, info, &shared))
 		return (ERROR);
 	null_free(shared.forks);
-	null_free(info);
+	null_free(shared.mutex_forks);
 	null_free(threads);
+	null_free(info);
 	return (0);
 }
 

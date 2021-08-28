@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 15:50:15 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 23:08:25 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	init_mutexes(t_shared *shared)
 	shared->mutex_forks = (pthread_mutex_t *)malloc(
 			(shared->nb_of_philos + 1) * sizeof(pthread_mutex_t));
 	if (!shared->mutex_forks)
+	{
+		null_free(shared->forks);
 		return (error_return("malloc failed"));
+	}
 	i = 0;
 	while (i++ < shared->nb_of_philos)
 		pthread_mutex_init(shared->mutex_forks + i, NULL);
