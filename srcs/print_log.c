@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 00:02:24 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/26 23:32:49 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 15:15:03 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int64_t	print_log(t_info *info, t_action action)
 
 	if (*(info->shared->someone_died) && action != DIE)
 		return (0);
+	status = NULL;
 	if (action == FORK)
 		status = "has taken a fork";
 	else if (action == EAT)
