@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/26 23:33:59 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 13:36:58 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <pthread.h>
 # include <limits.h>
 # include <stdbool.h>
+# include <inttypes.h>
 
 # define SUCCESS 0
 # define ERROR 1
