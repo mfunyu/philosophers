@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/26 23:13:02 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 14:26:26 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	drop_fork_and_sleep(t_info *info)
 	pthread_mutex_lock(&(info->shared->mutex));
 	info->shared->forks[right] = 0;
 	info->shared->forks[left] = 0;
-	simple_action(SLEEP, info->shared->time_to_sleep, info);
+	print_log(info, SLEEP);
 	pthread_mutex_unlock(&(info->shared->mutex));
+	usleep(info->shared->time_to_sleep);
 }
 
 void	*philo_thread(void *arg)

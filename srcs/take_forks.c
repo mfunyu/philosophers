@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/26 23:30:44 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/28 13:41:22 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	take_left_fork(t_info *info)
 	int		left_hand;
 
 	left_hand = info->who - 1;
-	if (info->who == info->shared->nb_of_philos)
-		left_hand = 0;
 	wait_a_fork(info, left_hand);
 	return (0);
 }
@@ -57,6 +55,8 @@ int	take_right_fork(t_info *info)
 	int		right_hand;
 
 	right_hand = info->who;
+	if (info->who == info->shared->nb_of_philos)
+		right_hand = 0;
 	wait_a_fork(info, right_hand);
 	return (0);
 }
