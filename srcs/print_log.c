@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 00:02:24 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 15:51:12 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/29 17:00:24 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int64_t	print_log(t_info *info, t_action action)
 	char			*status;
 	int64_t			timestamp_in_ms;
 
-	if (*(info->shared->someone_died) && action != DIE)
+	if (death_detected(info->shared) && action != DIE)
 		return (0);
 	status = NULL;
 	if (action == FORK)
