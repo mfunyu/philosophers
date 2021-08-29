@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 23:41:07 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/08/29 17:04:11 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
 	}
 	if (pthread_create(&end_thread, NULL, monitor_end_thread, shared))
 		return (error_return("thread creation failed"));
-	pthread_join(end_thread, &ret_val);
+	if (pthread_join(end_thread, &ret_val))
+		return (error_return("thread join failed"));
 	return (0);
 }
 
