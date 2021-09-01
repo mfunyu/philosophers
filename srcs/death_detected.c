@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/26 23:10:29 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/01 16:50:34 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 bool	death_detected(t_shared *shared)
 {
-	return (*(shared->someone_died));
+	return (shared->someone_died);
 }

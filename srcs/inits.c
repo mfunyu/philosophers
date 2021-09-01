@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 23:41:40 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/01 16:55:23 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ void	init_t_info(t_info *info, int who, t_shared *shared)
 
 int	init_t_shared(t_shared *shared)
 {
-	bool	someone_died;
-
-	someone_died = false;
-	shared->someone_died = &someone_died;
+	shared->someone_died = false;
 	shared->forks = (int *)malloc((shared->nb_of_philos + 1) * sizeof(int));
 	if (!shared->forks)
 		return (error_return("malloc failed"));

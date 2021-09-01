@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 23:42:10 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/01 16:50:18 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_shared
 	pthread_mutex_t	*mutex_forks;
 	pthread_mutex_t	mutex_eat;
 	pthread_mutex_t	mutex_print;
-	bool			*someone_died;
+	bool			someone_died;
 	int				*forks;
 	int				nb_of_philos;
 	int				time_to_die;
