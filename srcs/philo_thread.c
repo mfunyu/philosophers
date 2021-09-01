@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 15:52:37 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/01 16:31:29 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ void	drop_fork_and_sleep(t_info *info)
 		right = 0;
 	pthread_mutex_lock(&(info->shared->mutex_forks[right]));
 	info->shared->forks[right] = 0;
-	pthread_mutex_unlock(&(info->shared->mutex_forks[right]));
 	pthread_mutex_lock(&(info->shared->mutex_forks[left]));
 	info->shared->forks[left] = 0;
-	pthread_mutex_unlock(&(info->shared->mutex_forks[left]));
+	pthread_mutex_lock(&(info->shared->mutex_print));
 	print_log(info, SLEEP);
+	pthread_mutex_unlock(&(info->shared->mutex_print));
+	pthread_mutex_unlock(&(info->shared->mutex_forks[right]));
+	pthread_mutex_unlock(&(info->shared->mutex_forks[left]));
 	usleep(info->shared->time_to_sleep);
 }
 
