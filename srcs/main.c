@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/29 17:04:11 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/01 17:18:32 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,14 @@ int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
 	return (0);
 }
 
-int	philosophers(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_shared	shared;
 	t_info		*info;
 	pthread_t	*threads;
 
+	if (ac < 5 || 6 < ac)
+		return (error_return("Invalid argument"));
 	if (parse_args(&shared, ac, av))
 		return (ERROR);
 	if (init_t_shared(&shared))
@@ -73,14 +75,5 @@ int	philosophers(int ac, char **av)
 	null_free(shared.mutex_forks);
 	null_free(threads);
 	null_free(info);
-	return (0);
-}
-
-int	main(int ac, char **av)
-{
-	if (ac < 5 || 6 < ac)
-		return (error_return("Invalid argument"));
-	if (philosophers(ac, av))
-		return (ERROR);
 	return (0);
 }
