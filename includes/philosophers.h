@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/03 22:37:07 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/03 23:03:26 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ typedef struct s_info
 /*
 ** inits
 */
-void	init_t_info(t_info *info, int who, t_shared *shared);
 int		init_mutexes(t_shared *shared);
 int		init_t_shared(t_shared *shared);
-int		init_threads(t_info **info, t_shared *shared);
+int		init_t_info(t_info **info, t_shared *shared);
 
 void	*philo_thread(void *arg);
 void	*monitor_thread(void *arg);

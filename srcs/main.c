@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/03 22:44:37 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/03 23:03:18 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,13 @@ int	start_threads(t_info *info, t_shared *shared)
 	i = 0;
 	while (i < shared->nb_of_philos)
 	{
-		init_t_info(info, ++i, shared);
-		if (pthread_create(&thread, NULL, philo_thread, info))
+		if (pthread_create(&thread, NULL, philo_thread, info + i))
 			return (error_return("thread creation failed"));
 		pthread_detach(thread);
-		if (pthread_create(&thread, NULL, monitor_thread, info))
+		if (pthread_create(&thread, NULL, monitor_thread, info + i))
 			return (error_return("thread creation failed"));
 		pthread_detach(thread);
-		info++;
+		i++;
 	}
 	if (pthread_create(&end_thread, NULL, monitor_end_thread, shared))
 		return (error_return("thread creation failed"));
@@ -68,7 +67,7 @@ int	main(int ac, char **av)
 		return (ERROR);
 	if (init_mutexes(&shared))
 		return (ERROR);
-	if (init_threads(&info, &shared))
+	if (init_t_info(&info, &shared))
 		return (ERROR);
 	if (start_threads(info, &shared))
 		return (ERROR);

@@ -6,19 +6,11 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/03 22:36:58 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/03 23:03:14 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	init_t_info(t_info *info, int who, t_shared *shared)
-{
-	info->who = who;
-	info->is_start = 1;
-	info->last_meal = 0;
-	info->shared = shared;
-}
 
 int	init_t_shared(t_shared *shared)
 {
@@ -49,14 +41,25 @@ int	init_mutexes(t_shared *shared)
 	return (0);
 }
 
-int	init_threads(t_info **info, t_shared *shared)
+int	init_t_info(t_info **info, t_shared *shared)
 {
-	*info = (t_info *)malloc((shared->nb_of_philos + 1) * sizeof(t_info));
+	int		i;
+
+	*info = (t_info *)malloc((shared->nb_of_philos + 2) * sizeof(t_info));
 	if (!*info)
 	{
 		null_free(shared->forks);
 		null_free(shared->mutex_forks);
 		return (error_return("malloc failed"));
+	}
+	i = 0;
+	while (i < shared->nb_of_philos)
+	{
+		(*info)[i].who = i + 1;
+		(*info)[i].is_start = 1;
+		(*info)[i].last_meal = 0;
+		(*info)[i].shared = shared;
+		i++;
 	}
 	return (0);
 }
