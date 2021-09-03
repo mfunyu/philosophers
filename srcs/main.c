@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/01 17:18:32 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/03 22:44:37 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ int	parse_args(t_shared *shared, int ac, char **av)
 	return (0);
 }
 
-int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
+int	start_threads(t_info *info, t_shared *shared)
 {
 	int			i;
+	pthread_t	thread;
 	pthread_t	end_thread;
 	void		*ret_val;
 
@@ -39,12 +40,13 @@ int	start_threads(pthread_t *threads, t_info *info, t_shared *shared)
 	while (i < shared->nb_of_philos)
 	{
 		init_t_info(info, ++i, shared);
-		if (pthread_create(threads, NULL, philo_thread, info))
+		if (pthread_create(&thread, NULL, philo_thread, info))
 			return (error_return("thread creation failed"));
-		pthread_detach(*threads++);
-		if (pthread_create(threads, NULL, monitor_thread, info++))
+		pthread_detach(thread);
+		if (pthread_create(&thread, NULL, monitor_thread, info))
 			return (error_return("thread creation failed"));
-		pthread_detach(*threads++);
+		pthread_detach(thread);
+		info++;
 	}
 	if (pthread_create(&end_thread, NULL, monitor_end_thread, shared))
 		return (error_return("thread creation failed"));
@@ -57,7 +59,6 @@ int	main(int ac, char **av)
 {
 	t_shared	shared;
 	t_info		*info;
-	pthread_t	*threads;
 
 	if (ac < 5 || 6 < ac)
 		return (error_return("Invalid argument"));
@@ -67,13 +68,12 @@ int	main(int ac, char **av)
 		return (ERROR);
 	if (init_mutexes(&shared))
 		return (ERROR);
-	if (init_threads(&threads, &info, &shared))
+	if (init_threads(&info, &shared))
 		return (ERROR);
-	if (start_threads(threads, info, &shared))
+	if (start_threads(info, &shared))
 		return (ERROR);
 	null_free(shared.forks);
 	null_free(shared.mutex_forks);
-	null_free(threads);
 	null_free(info);
 	return (0);
 }
