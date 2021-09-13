@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 08:38:49 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 09:21:36 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 
 # define SUCCESS 0
 # define ERROR 1
+
+# define RIGHT 0
+# define LEFT 1
 
 typedef enum e_action
 {
@@ -55,7 +58,8 @@ typedef struct s_shared
 typedef struct s_info
 {
 	t_shared	*shared;
-	int			philo_nb;
+	int			philo_id;
+	int			ts_lastmeal;
 }			t_info;
 
 /*
@@ -65,6 +69,14 @@ int	init_t_shared(t_shared *shared, int ac, char **av);
 int	init_t_info(t_info **info, t_shared *shared);
 
 int	threads_start(t_info *info);
+
+/*
+** threads
+*/
+void	*thread_philo(void *arg);
+void	*thread_monitor(void *arg);
+void	*thread_end_monitor(void *arg);
+
 /*
 ** error
 */

@@ -6,31 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:13:50 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 08:40:26 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 09:25:17 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*thread_philo(void *arg)
-{
-	t_info	*info;
-
-	info = (t_info *)arg;
-	printf("T %d: %d\n", info->philo_nb, info->shared->arr_forks[1]);
-	return (NULL);
-}
-
-void	*thread_monitor(void *arg)
-{
-	t_info	*info;
-
-	info = (t_info *)arg;
-	printf("M %d: %d\n", info->philo_nb, info->shared->arr_forks[1]);
-	return (NULL);
-}
-
-int	thread_start(pthread_t	*thread, void *func, t_info *info, t_th_type type)
+int	thread_start(pthread_t	*thread, void *(*func)(void *), t_info *info, t_th_type type)
 {
 	if (pthread_create(thread, NULL, func, info))
 		return (error_return("pthread_create failed"));
@@ -43,6 +25,7 @@ int	thread_start(pthread_t	*thread, void *func, t_info *info, t_th_type type)
 	{
 		if (pthread_join(*thread, NULL))
 			return (error_return("pthread_join failed"));
+		printf("Joined\n");
 	}
 	return (SUCCESS);
 }
@@ -62,7 +45,7 @@ int	threads_start(t_info *info)
 			return (ERROR);
 		i++;
 	}
-	if (thread_start(&end_monitor_thread, thread_monitor, info + i, JOIN))
+	if (thread_start(&end_monitor_thread, thread_end_monitor, info + i, JOIN))
 		return (ERROR);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 08:11:57 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 09:21:36 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ int	init_t_info(t_info **info, t_shared *shared)
 	while (i < shared->nb_philos)
 	{
 		(info_p + i)->shared = shared;
-		(info_p + i)->philo_nb = i + 1;
+		(info_p + i)->philo_id = i + 1;
+		(info_p + i)->ts_lastmeal = 0;
 		i++;
 	}
 	(info_p + i)->shared = shared;
-	(info_p + i)->philo_nb = -1;
+	(info_p + i)->philo_id = -1;
 	*info = info_p;
 	return (SUCCESS);
 }
