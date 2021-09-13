@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:42:40 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 15:39:45 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 16:02:46 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ int	take_a_fork(t_info *info, int hand)
 		if (info->philo_id == info->shared->nb_philos)
 			fork_nb = 0;
 	}
-	pthread_mutex_lock(info->shared->mutexs + AFORK);
+	pthread_mutex_lock(info->shared->mutex_forks + fork_nb);
 	if (info->shared->arr_forks[fork_nb] == 0)
 		info->shared->arr_forks[fork_nb] = info->philo_id;
-	// printf("id %d: fork: %d\n", info->philo_id, fork_nb);
-	pthread_mutex_unlock(info->shared->mutexs + AFORK);
+	pthread_mutex_unlock(info->shared->mutex_forks + fork_nb);
 	return (SUCCESS);
 }
 
@@ -43,7 +42,7 @@ int	action_take_forks(t_info *info)
 
 int	action(int (*func)(t_info *), t_info *info)
 {
-	if (is_eop(info))
+	if (is_eos(info))
 		return (ERROR);
 	if (func(info))
 		return (ERROR);
@@ -56,11 +55,6 @@ void	*thread_philo(void *arg)
 
 	info = (t_info *)arg;
 	printf("T %d\n", info->philo_id);
-	// pthread_mutex_lock(&(info->shared->mutex_fork));
-	// if (info->shared->arr_forks[1] == 0)
-	// 	info->shared->arr_forks[1] = info->philo_id;
-	// printf("id %d: fork: %d\n", info->philo_id, 1);
-	// pthread_mutex_unlock(&(info->shared->mutex_fork));
 	while (1)
 	{
 		if (action(action_take_forks, info))

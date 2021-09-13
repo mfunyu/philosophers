@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:43:05 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 15:51:30 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 16:02:46 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	*thread_end_monitor(void *arg)
 
 	info = (t_info *)arg;
 	printf("E \n");
-	pthread_mutex_lock(info->shared->mutexs + EOP);
-	info->shared->flag_eop = 1;
-	pthread_mutex_unlock(info->shared->mutexs + EOP);
+	pthread_mutex_lock(info->shared->mutexs + EOS);
+	info->shared->flag_eos = 1;
+	pthread_mutex_unlock(info->shared->mutexs + EOS);
 	usleep(1000);
 	return (NULL);
 }
