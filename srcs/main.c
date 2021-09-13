@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 07:55:28 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 09:27:32 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 09: by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ int	check_args(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	t_shared	shared;
+	t_shared	*shared;
 	t_info		*info;
 
 	if (ac < 5 || ac > 6 || check_args(ac, av))
 		return (error_return("Invalid Arguments"));
 	if (init_t_shared(&shared, ac, av))
 		return (ERROR);
-	if (init_t_shared(&shared, ac, av))
+	if (init_mutexes(&shared))
 		return (ERROR);
-	if (init_t_info(&info, &shared))
+	if (init_t_info(&info, shared))
 		return (ERROR);
 	if (threads_start(info))
 		return (ERROR);

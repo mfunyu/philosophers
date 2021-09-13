@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_monitor.c                                   :+:      :+:    :+:   */
+/*   is_eop.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 15:14:58 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/09/13 10:04:43 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/09/13 15:51:00 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*thread_monitor(void *arg)
+bool	is_eop(t_info *info)
 {
-	t_info	*info;
-
-	info = (t_info *)arg;
-	printf("M \n" );
-	(void)info;
-	return (NULL);
+	pthread_mutex_lock(info->shared->mutexs + EOP);
+	if (info->shared->flag_eop == 1)
+	{
+		printf("eop!\n");
+		return (true);
+	}
+	pthread_mutex_unlock(info->shared->mutexs + EOP);
+	return (false);
 }
-

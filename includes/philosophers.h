@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 09:21:36 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 11:07:55 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,24 @@ typedef enum e_th_type
 	JOIN
 }			t_th_type;
 
+typedef enum e_mutex_type
+{
+	EOP,
+	AFORK,
+	TOTAL
+}			t_mutex_type;
+
 typedef struct s_shared
 {
-	int		*arr_forks;
-	int		nb_philos;
-	int		time2die;
-	int		time2eat;
-	int		time2sleep;
-	int		nb_eat;
-	int		flag_eop;
+	int				*arr_forks;
+	int				nb_philos;
+	int				time2die;
+	int				time2eat;
+	int				time2sleep;
+	int				nb_eat;
+	int				flag_eop;
+	pthread_mutex_t	*mutex_forks;
+	pthread_mutex_t	*mutexs;
 }			t_shared;
 
 typedef struct s_info
@@ -65,8 +74,9 @@ typedef struct s_info
 /*
 ** inits
 */
-int	init_t_shared(t_shared *shared, int ac, char **av);
+int	init_t_shared(t_shared **shared, int ac, char **av);
 int	init_t_info(t_info **info, t_shared *shared);
+int	init_mutexes(t_shared **shared);
 
 int	threads_start(t_info *info);
 
@@ -77,6 +87,7 @@ void	*thread_philo(void *arg);
 void	*thread_monitor(void *arg);
 void	*thread_end_monitor(void *arg);
 
+bool	is_eop(t_info *info);
 /*
 ** error
 */
