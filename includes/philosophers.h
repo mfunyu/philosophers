@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 08:03:14 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 08:38:49 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef enum e_action
 	DIE
 }			t_action;
 
+typedef enum e_th_type
+{
+	DETACH,
+	JOIN
+}			t_th_type;
+
 typedef struct s_shared
 {
 	int		*arr_forks;
@@ -58,7 +64,7 @@ typedef struct s_info
 int	init_t_shared(t_shared *shared, int ac, char **av);
 int	init_t_info(t_info **info, t_shared *shared);
 
-
+int	threads_start(t_info *info);
 /*
 ** error
 */

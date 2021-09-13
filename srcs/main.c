@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 07:55:28 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 08:12:15 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 08:13:34 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	main(int ac, char **av)
 	if (init_t_shared(&shared, ac, av))
 		return (ERROR);
 	if (init_t_info(&info, &shared))
+		return (ERROR);
+	if (threads_start(info))
 		return (ERROR);
 	printf("%d: %d\n", (info + 3)->philo_nb, (info + 3)->shared->arr_forks[1]);
 	// start_thread;
