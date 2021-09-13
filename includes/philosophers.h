@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/12 14:47:11 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 08:03:14 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,18 @@ typedef struct s_shared
 	int		flag_eop;
 }			t_shared;
 
+typedef struct s_info
+{
+	t_shared	*shared;
+	int			philo_nb;
+}			t_info;
+
 /*
 ** inits
 */
 int	init_t_shared(t_shared *shared, int ac, char **av);
+int	init_t_info(t_info **info, t_shared *shared);
+
 
 /*
 ** error
