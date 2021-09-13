@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 16:32:56 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 16:53:25 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	take_a_fork(t_info *info, int hand)
 	bool	got_fork;
 
 	if (hand == RIGHT)
-		fork_nb = info->philo_id - 1;
-	else
 	{
 		fork_nb = info->philo_id;
 		if (info->philo_id == info->shared->nb_philos)
 			fork_nb = 0;
 	}
+	else
+		fork_nb = info->philo_id - 1;
 	got_fork = false;
 	while (!got_fork)
 	{
@@ -33,20 +33,25 @@ int	take_a_fork(t_info *info, int hand)
 		{
 			info->shared->arr_forks[fork_nb] = info->philo_id;
 			got_fork = true;
-			printf("fork %d\n", info->philo_id);
+			print_timestamp_log(info, FORK);
 		}
 		pthread_mutex_unlock(info->shared->mutex_forks + fork_nb);
 	}
 	if (hand == LEFT)
-		print_timestamp_log(info, FORK);
+	{
+		print_timestamp_log(info, EAT);
+		ms_sleep(info->shared->time2eat);
+	}
 	return (SUCCESS);
 }
 
 int	action_take_forks(t_info *info)
 {
-	if (!info->ts_lastmeal && info->philo_id % 2)
+	if (!info->ts_lastmeal)
 	{
-		usleep(2000);
+		info->ts_lastmeal = get_timestamp_ms();
+		if (info->philo_id % 2)
+			usleep(200);
 		printf("yeees %d\n", info->philo_id);
 	}
 	take_a_fork(info, RIGHT);

@@ -1,39 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_philo.c                                     :+:      :+:    :+:   */
+/*   ms_sleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 08:42:40 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 16:35:09 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/09/13 16:45:32 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/09/13 16:46:11 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	action(int (*func)(t_info *), t_info *info)
+void	ms_sleep(int time)
 {
-	if (is_eos(info))
-		return (ERROR);
-	if (func(info))
-		return (ERROR);
-	return (SUCCESS);
+	usleep(time * 1000);
 }
-
-void	*thread_philo(void *arg)
-{
-	t_info	*info;
-
-	info = (t_info *)arg;
-	printf("T %d\n", info->philo_id);
-	while (1)
-	{
-		if (action(action_take_forks, info))
-			return (NULL);
-		if (action(action_drop_fork_and_sleep, info))
-			return (NULL);
-	}
-	return (NULL);
-}
-
