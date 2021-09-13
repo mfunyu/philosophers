@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_philo.c                                     :+:      :+:    :+:   */
+/*   get_timestamp_ms.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/13 08:42:40 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 16:15:33 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/09/13 16:05:00 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/09/13 16:12:31 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	action(int (*func)(t_info *), t_info *info)
+int64_t	get_timestamp_ms(void)
 {
-	if (is_eos(info))
-		return (ERROR);
-	if (func(info))
-		return (ERROR);
-	return (SUCCESS);
+	struct timeval	tv;
+	int64_t			timestamp_in_ms;
+
+	if (gettimeofday(&tv, NULL))
+		return (error_return("gettimeofday failed"));
+	timestamp_in_ms = (int64_t)(tv.tv_sec * 1000 + tv.tv_usec / 1000.0);
+	return (timestamp_in_ms);
 }
-
-void	*thread_philo(void *arg)
-{
-	t_info	*info;
-
-	info = (t_info *)arg;
-	printf("T %d\n", info->philo_id);
-	while (1)
-	{
-		if (action(action_take_forks, info))
-			return (NULL);
-	}
-	return (NULL);
-}
-
