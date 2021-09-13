@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 09:21:36 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 09:32:25 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,18 @@ int	init_t_info(t_info **info, t_shared *shared)
 	t_info	*info_p;
 	int		i;
 
-	info_p = *info;
-	info_p = (t_info *)malloc(((shared->nb_philos + 1) + 1) * sizeof(t_info));
-	if (!info_p)
+	*info = (t_info *)malloc(((shared->nb_philos + 1) + 1) * sizeof(t_info));
+	if (!*info)
 		return (error_return("malloc failed"));
+	info_p = *info;
 	i = 0;
-	while (i < shared->nb_philos)
+	while (i < shared->nb_philos + 1)
 	{
-		(info_p + i)->shared = shared;
-		(info_p + i)->philo_id = i + 1;
-		(info_p + i)->ts_lastmeal = 0;
+		info_p->shared = shared;
+		info_p->philo_id = i + 1;
+		info_p->ts_lastmeal = 0;
+		info_p++;
 		i++;
 	}
-	(info_p + i)->shared = shared;
-	(info_p + i)->philo_id = -1;
-	*info = info_p;
 	return (SUCCESS);
 }
