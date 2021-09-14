@@ -6,15 +6,24 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 14:44:52 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 17:08:30 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+static void	_set_ts_lastmeal(t_info *info, int64_t timestamp, bool update)
+{
+	pthread_mutex_lock(&info->shared->mutexs[LASTMEAL + info->philo_id]);
+	if (update || !info->ts_lastmeal)
+		info->ts_lastmeal = timestamp;
+	pthread_mutex_unlock(&info->shared->mutexs[LASTMEAL + info->philo_id]);
+}
+
 int	take_a_fork(t_info *info, int fork_nb, int hand)
 {
 	bool	got_fork;
+	int64_t	timestamp;
 
 	got_fork = false;
 	while (!got_fork)
@@ -24,15 +33,15 @@ int	take_a_fork(t_info *info, int fork_nb, int hand)
 		{
 			info->shared->arr_forks[fork_nb] = info->philo_id;
 			got_fork = true;
-			print_timestamp_log(info, FORK);
+			timestamp = print_timestamp_log(info, FORK);
+			_set_ts_lastmeal(info, timestamp, false);
 		}
 		pthread_mutex_unlock(&info->shared->mutex_forks[fork_nb]);
 	}
 	if (hand == LEFT)
 	{
-		pthread_mutex_lock(&info->shared->mutexs[LASTMEAL + info->philo_id]);
-		info->ts_lastmeal = print_timestamp_log(info, EAT);
-		pthread_mutex_unlock(&info->shared->mutexs[LASTMEAL + info->philo_id]);
+		timestamp = print_timestamp_log(info, EAT);
+		_set_ts_lastmeal(info, timestamp, true);
 		ms_sleep(info->shared->time2eat);
 	}
 	return (SUCCESS);
