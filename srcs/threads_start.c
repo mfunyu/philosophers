@@ -6,13 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:13:50 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 14:31:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 17:27:36 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	thread_start(void *(*func)(void *), t_info *info, t_th_type type)
+static int	_thread_start(void *(*func)(void *), t_info *info, t_th_type type)
 {
 	pthread_t	thread;
 
@@ -38,13 +38,13 @@ int	threads_start(t_info *info)
 	i = 0;
 	while (i < info->shared->nb_philos)
 	{
-		if (thread_start(thread_philo, info + i, DETACH))
+		if (_thread_start(thread_philo, info + i, DETACH))
 			return (ERROR);
-		if (thread_start(thread_monitor, info + i, DETACH))
+		if (_thread_start(thread_monitor, info + i, DETACH))
 			return (ERROR);
 		i++;
 	}
-	if (thread_start(thread_end_monitor, info + i, JOIN))
+	if (_thread_start(thread_end_monitor, info + i, JOIN))
 		return (ERROR);
 	return (SUCCESS);
 }
