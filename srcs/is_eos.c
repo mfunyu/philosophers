@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor_end_thread.c                               :+:      :+:    :+:   */
+/*   is_eos.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/20 00:24:15 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/26 23:11:21 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/09/13 10:04:43 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/09/14 14:21:13 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*monitor_end_thread(void *arg)
+bool	is_eos(t_info *info)
 {
-	t_shared	*shared;
-
-	shared = (t_shared *)arg;
-	while (!death_detected(shared))
-	 ;
-	return (NULL);
+	pthread_mutex_lock(&info->shared->mutexs[EOS]);
+	if (info->shared->flag_eos == 1)
+		return (true);
+	pthread_mutex_unlock(&info->shared->mutexs[EOS]);
+	return (false);
 }

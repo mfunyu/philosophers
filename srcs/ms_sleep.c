@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ms_sleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/17 04:02:47 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/17 14:40:17 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/09/13 16:45:32 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/09/13 16:46:11 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	error_return(char *error_msg)
+void	ms_sleep(int time)
 {
-	ft_putstr_fd("Error: ", STDERR_FILENO);
-	ft_putendl_fd(error_msg, STDERR_FILENO);
-	return (ERROR);
+	usleep(time * 1000);
 }

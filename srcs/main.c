@@ -5,74 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 22:52:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/03 23:03:18 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/09/12 07:55:28 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/09/13 09: by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	parse_args(t_shared *shared, int ac, char **av)
+int	check_args(int ac, char **av)
 {
+	int		i;
+	int		ret;
 	int		error;
 
+	i = 1;
 	error = 0;
-	shared->nb_of_philos = ft_atoi_check(av[1], &error);
-	shared->time_to_die = ft_atoi_check(av[2], &error) * 1000;
-	shared->time_to_eat = ft_atoi_check(av[3], &error) * 1000;
-	shared->time_to_sleep = ft_atoi_check(av[4], &error) * 1000;
-	shared->must_eat = -1;
-	if (ac == 6)
-		shared->must_eat = ft_atoi_check(av[5], &error);
-	if (error)
-		return (error_return("Invalid argument"));
-	return (0);
-}
-
-int	start_threads(t_info *info, t_shared *shared)
-{
-	int			i;
-	pthread_t	thread;
-	pthread_t	end_thread;
-	void		*ret_val;
-
-	i = 0;
-	while (i < shared->nb_of_philos)
+	while (!error && i < ac)
 	{
-		if (pthread_create(&thread, NULL, philo_thread, info + i))
-			return (error_return("thread creation failed"));
-		pthread_detach(thread);
-		if (pthread_create(&thread, NULL, monitor_thread, info + i))
-			return (error_return("thread creation failed"));
-		pthread_detach(thread);
+		ret = ft_atoi_check(av[i], &error);
+		if (ret < 0)
+			error = ERROR;
 		i++;
 	}
-	if (pthread_create(&end_thread, NULL, monitor_end_thread, shared))
-		return (error_return("thread creation failed"));
-	if (pthread_join(end_thread, &ret_val))
-		return (error_return("thread join failed"));
-	return (0);
+	if (error)
+		return (ERROR);
+	return (SUCCESS);
 }
 
 int	main(int ac, char **av)
 {
-	t_shared	shared;
+	t_shared	*shared;
 	t_info		*info;
 
-	if (ac < 5 || 6 < ac)
-		return (error_return("Invalid argument"));
-	if (parse_args(&shared, ac, av))
-		return (ERROR);
-	if (init_t_shared(&shared))
+	if (ac < 5 || ac > 6 || check_args(ac, av))
+		return (error_return("Invalid Arguments"));
+	if (init_t_shared(&shared, ac, av))
 		return (ERROR);
 	if (init_mutexes(&shared))
 		return (ERROR);
-	if (init_t_info(&info, &shared))
+	if (init_t_info(&info, shared))
 		return (ERROR);
-	if (start_threads(info, &shared))
+	if (threads_start(info))
 		return (ERROR);
-	null_free(shared.forks);
-	null_free(shared.mutex_forks);
-	null_free(info);
 	return (0);
 }

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_func_in_mutex.c                               :+:      :+:    :+:   */
+/*   get_timestamp_ms.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 23:00:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/08/28 16:00:17 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/09/13 16:05:00 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/09/13 16:12:31 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	exec_func_in_mutex(t_info *info, int arg, int func(t_info *, int))
+int64_t	get_timestamp_ms(void)
 {
-	int		ret;
+	struct timeval	tv;
+	int64_t			timestamp_in_ms;
 
-	ret = 0;
-	if (death_detected(info->shared))
-		return (0);
-	pthread_mutex_lock(&(info->shared->mutex_forks[arg]));
-	ret = (*func)(info, arg);
-	pthread_mutex_unlock(&(info->shared->mutex_forks[arg]));
-	return (ret);
+	if (gettimeofday(&tv, NULL))
+		return (error_return("gettimeofday failed"));
+	timestamp_in_ms = (int64_t)(tv.tv_sec * 1000 + tv.tv_usec / 1000.0);
+	return (timestamp_in_ms);
 }
