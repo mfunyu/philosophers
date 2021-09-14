@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:43:05 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 12:48:44 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 13:17:07 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ void	*thread_end_monitor(void *arg)
 	usleep(1000);
 	return (NULL);
 }
-

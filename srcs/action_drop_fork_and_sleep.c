@@ -6,13 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:35:23 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 16:49:20 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 13:21:17 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int action_drop_fork_and_sleep(t_info *info)
+int	action_drop_fork_and_sleep(t_info *info)
 {
 	int		right;
 	int		left;

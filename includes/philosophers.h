@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 17:14:50 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 13:15:55 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ typedef struct s_info
 /*
 ** inits
 */
-int	init_t_shared(t_shared **shared, int ac, char **av);
-int	init_t_info(t_info **info, t_shared *shared);
-int	init_mutexes(t_shared **shared);
+int		init_t_shared(t_shared **shared, int ac, char **av);
+int		init_t_info(t_info **info, t_shared *shared);
+int		init_mutexes(t_shared **shared);
 
-int	threads_start(t_info *info);
+int		threads_start(t_info *info);
 
 /*
 ** threads
@@ -91,14 +91,13 @@ void	*thread_end_monitor(void *arg);
 /*
 ** actions
 */
-int	action_take_forks(t_info *info);
-int action_drop_fork_and_sleep(t_info *info);
-int	action_think(t_info *info);
-
+int		action_take_forks(t_info *info);
+int		action_drop_fork_and_sleep(t_info *info);
+int		action_think(t_info *info);
 
 bool	is_eos(t_info *info);
 int64_t	get_timestamp_ms(void);
-int	print_timestamp_log(t_info *info, t_action action);
+int		print_timestamp_log(t_info *info, t_action action);
 void	ms_sleep(int time);
 
 /*

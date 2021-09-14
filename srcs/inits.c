@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 10:31:59 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 13:22:44 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	init_t_shared(t_shared **shared, int ac, char **av)
 	if (ac == 6)
 		shared_p->nb_eat = ft_atoi(av[5]);
 	shared_p->flag_eos = 0;
-	shared_p->arr_forks = (int *)malloc((shared_p->nb_philos + 1) * sizeof(int));
+	shared_p->arr_forks = (int *)
+		malloc((shared_p->nb_philos + 1) * sizeof(int));
 	if (!shared_p->arr_forks)
 		return (error_return("malloc failed"));
 	memset(shared_p->arr_forks, 0, (shared_p->nb_philos + 1) * sizeof(int));
@@ -59,7 +60,7 @@ int	init_t_info(t_info **info, t_shared *shared)
 int	init_mutexes(t_shared **shared)
 {
 	t_shared	*shared_p;
-	int		i;
+	int			i;
 
 	shared_p = *shared;
 	shared_p->mutex_forks = (pthread_mutex_t *)

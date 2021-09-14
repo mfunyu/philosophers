@@ -6,13 +6,14 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:13:50 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 12:50:07 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 13:16:13 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	thread_start(pthread_t *thread, void *(*func)(void *), t_info *info, t_th_type type)
+int	thread_start(pthread_t *thread, void *(*func)(void *),
+					t_info *info, t_th_type type)
 {
 	if (pthread_create(thread, NULL, func, info))
 		return (error_return("pthread_create failed"));
