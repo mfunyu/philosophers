@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:00:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 16:14:42 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 13:11:49 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	print_timestamp_log(t_info *info, t_action action)
 	timestamp_in_ms = get_timestamp_ms();
 	if (timestamp_in_ms == ERROR)
 		return (ERROR);
+	pthread_mutex_lock(info->shared->mutexs + PRINT);
 	printf("%"PRId64" %d %s\n", timestamp_in_ms, info->philo_id, status);
+	if (action == DIE)
+		return (0);
+	pthread_mutex_unlock(info->shared->mutexs + PRINT);
 	return (timestamp_in_ms);
 }

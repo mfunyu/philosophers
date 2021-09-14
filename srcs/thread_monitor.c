@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 12:51:36 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 13:11:55 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	*thread_monitor(void *arg)
 		{
 			pthread_mutex_lock(info->shared->mutexs + EOS);
 			info->shared->flag_eos = 1;
-			print_timestamp_log(info, DIE);
 			pthread_mutex_unlock(info->shared->mutexs + EOS);
+			print_timestamp_log(info, DIE);
 			return (NULL);
 		}
 		pthread_mutex_unlock(info->shared->mutexs + LASTMEAL + info->philo_id);
