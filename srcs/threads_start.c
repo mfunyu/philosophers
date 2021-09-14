@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:13:50 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 09:34:04 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 12:50:07 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	thread_start(pthread_t *thread, void *(*func)(void *), t_info *info, t_th_ty
 	{
 		if (pthread_join(*thread, NULL))
 			return (error_return("pthread_join failed"));
-		printf("Joined\n");
 	}
 	return (SUCCESS);
 }

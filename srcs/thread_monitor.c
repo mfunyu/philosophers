@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 10:33:17 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 12:51:36 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	*thread_monitor(void *arg)
 		if (info->ts_lastmeal
 			&& get_timestamp_ms() - info->ts_lastmeal >= info->shared->time2die)
 		{
-			// printf("diff %ld\n", get_timestamp_ms() - info->ts_lastmeal);
 			pthread_mutex_lock(info->shared->mutexs + EOS);
 			info->shared->flag_eos = 1;
 			print_timestamp_log(info, DIE);

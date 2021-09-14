@@ -47,6 +47,5 @@ int	main(int ac, char **av)
 		return (ERROR);
 	if (threads_start(info))
 		return (ERROR);
-	printf("main ended\n");
 	return (0);
 }
