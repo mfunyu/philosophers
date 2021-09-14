@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 10:34:40 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 10:51:01 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,6 @@ int	take_a_fork(t_info *info, int hand)
 
 int	action_take_forks(t_info *info)
 {
-	pthread_mutex_lock(info->shared->mutexs + LASTMEAL + info->philo_id);
-	if (!info->ts_lastmeal)
-	{
-		info->ts_lastmeal = get_timestamp_ms();
-		if (info->philo_id % 2)
-			usleep(200);
-	}
-	pthread_mutex_unlock(info->shared->mutexs + LASTMEAL + info->philo_id);
 	take_a_fork(info, RIGHT);
 	take_a_fork(info, LEFT);
 	return (SUCCESS);
