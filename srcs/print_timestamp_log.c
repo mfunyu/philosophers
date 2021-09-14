@@ -6,13 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:00:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 14:21:29 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 14:44:03 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	print_timestamp_log(t_info *info, t_action action)
+int64_t	print_timestamp_log(t_info *info, t_action action)
 {
 	char	*status;
 	int64_t	timestamp_in_ms;

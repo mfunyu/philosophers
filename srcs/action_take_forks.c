@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 14:20:30 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 14:44:52 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	take_a_fork(t_info *info, int fork_nb, int hand)
 	}
 	if (hand == LEFT)
 	{
-		print_timestamp_log(info, EAT);
+		pthread_mutex_lock(&info->shared->mutexs[LASTMEAL + info->philo_id]);
+		info->ts_lastmeal = print_timestamp_log(info, EAT);
+		pthread_mutex_unlock(&info->shared->mutexs[LASTMEAL + info->philo_id]);
 		ms_sleep(info->shared->time2eat);
 	}
 	return (SUCCESS);

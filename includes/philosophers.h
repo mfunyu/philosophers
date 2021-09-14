@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 13:15:55 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 14:43:56 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		action_think(t_info *info);
 
 bool	is_eos(t_info *info);
 int64_t	get_timestamp_ms(void);
-int		print_timestamp_log(t_info *info, t_action action);
+int64_t	print_timestamp_log(t_info *info, t_action action);
 void	ms_sleep(int time);
 
 /*
