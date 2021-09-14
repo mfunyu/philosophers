@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 13:20:41 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 14:20:30 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	take_a_fork(t_info *info, int fork_nb, int hand)
 	got_fork = false;
 	while (!got_fork)
 	{
-		pthread_mutex_lock(info->shared->mutex_forks + fork_nb);
+		pthread_mutex_lock(&info->shared->mutex_forks[fork_nb]);
 		if (info->shared->arr_forks[fork_nb] == 0)
 		{
 			info->shared->arr_forks[fork_nb] = info->philo_id;
 			got_fork = true;
 			print_timestamp_log(info, FORK);
 		}
-		pthread_mutex_unlock(info->shared->mutex_forks + fork_nb);
+		pthread_mutex_unlock(&info->shared->mutex_forks[fork_nb]);
 	}
 	if (hand == LEFT)
 	{
