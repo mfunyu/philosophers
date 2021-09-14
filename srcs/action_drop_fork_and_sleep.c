@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:35:23 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 14:20:09 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 17:15:19 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	action_drop_fork_and_sleep(t_info *info)
 	pthread_mutex_lock(&info->shared->mutex_forks[right]);
 	info->shared->arr_forks[right] = 0;
 	pthread_mutex_lock(&info->shared->mutex_forks[left]);
-	info->shared->arr_forks[right] = 0;
+	info->shared->arr_forks[left] = 0;
 	print_timestamp_log(info, SLEEP);
 	pthread_mutex_unlock(&info->shared->mutex_forks[right]);
 	pthread_mutex_unlock(&info->shared->mutex_forks[left]);
