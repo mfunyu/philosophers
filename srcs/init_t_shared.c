@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inits.c                                            :+:      :+:    :+:   */
+/*   init_t_shared.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 13:22:44 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 17:23:05 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,53 +33,5 @@ int	init_t_shared(t_shared **shared, int ac, char **av)
 	if (!shared_p->arr_forks)
 		return (error_return("malloc failed"));
 	memset(shared_p->arr_forks, 0, (shared_p->nb_philos + 1) * sizeof(int));
-	return (SUCCESS);
-}
-
-int	init_t_info(t_info **info, t_shared *shared)
-{
-	t_info	*info_p;
-	int		i;
-
-	*info = (t_info *)malloc(((shared->nb_philos + 1) + 1) * sizeof(t_info));
-	if (!*info)
-		return (error_return("malloc failed"));
-	info_p = *info;
-	i = 0;
-	while (i < shared->nb_philos + 1)
-	{
-		info_p->shared = shared;
-		info_p->philo_id = i + 1;
-		info_p->ts_lastmeal = 0;
-		info_p++;
-		i++;
-	}
-	return (SUCCESS);
-}
-
-int	init_mutexes(t_shared **shared)
-{
-	t_shared	*shared_p;
-	int			i;
-
-	shared_p = *shared;
-	shared_p->mutex_forks = (pthread_mutex_t *)
-		malloc((shared_p->nb_philos + 1) * sizeof(pthread_mutex_t));
-	if (!shared_p->mutex_forks)
-		return (error_return("malloc failed"));
-	i = 0;
-	while (i < shared_p->nb_philos)
-	{
-		pthread_mutex_init(shared_p->mutex_forks + i, NULL);
-		i++;
-	}
-	shared_p->mutexs = (pthread_mutex_t *)
-		malloc((TOTAL + shared_p->nb_philos + 1) * sizeof(pthread_mutex_t));
-	i = 0;
-	while (i < TOTAL + shared_p->nb_philos)
-	{
-		pthread_mutex_init(shared_p->mutexs + i, NULL);
-		i++;
-	}
 	return (SUCCESS);
 }
