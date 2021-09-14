@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 17:07:33 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/13 17:14:50 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	*thread_end_monitor(void *arg);
 */
 int	action_take_forks(t_info *info);
 int action_drop_fork_and_sleep(t_info *info);
+int	action_think(t_info *info);
 
 
 bool	is_eos(t_info *info);

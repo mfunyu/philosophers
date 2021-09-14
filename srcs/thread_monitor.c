@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 17:08:52 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 10:33:17 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*thread_monitor(void *arg)
 	info = (t_info *)arg;
 	while (1)
 	{
-		pthread_mutex_lock(info->shared->mutexs + LASTMEAL);
+		pthread_mutex_lock(info->shared->mutexs + LASTMEAL + info->philo_id);
 		if (info->ts_lastmeal
 			&& get_timestamp_ms() - info->ts_lastmeal >= info->shared->time2die)
 		{
@@ -30,7 +30,7 @@ void	*thread_monitor(void *arg)
 			pthread_mutex_unlock(info->shared->mutexs + EOS);
 			return (NULL);
 		}
-		pthread_mutex_unlock(info->shared->mutexs + LASTMEAL);
+		pthread_mutex_unlock(info->shared->mutexs + LASTMEAL + info->philo_id);
 	}
 	return (NULL);
 }

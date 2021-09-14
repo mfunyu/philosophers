@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 16:02:46 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/14 10:31:59 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	init_mutexes(t_shared **shared)
 		i++;
 	}
 	shared_p->mutexs = (pthread_mutex_t *)
-		malloc((TOTAL + 1) * sizeof(pthread_mutex_t));
+		malloc((TOTAL + shared_p->nb_philos + 1) * sizeof(pthread_mutex_t));
 	i = 0;
-	while (i < TOTAL)
+	while (i < TOTAL + shared_p->nb_philos)
 	{
 		pthread_mutex_init(shared_p->mutexs + i, NULL);
 		i++;
