@@ -15,7 +15,7 @@
 bool	is_meal_finished(t_info *info)
 {
 	pthread_mutex_lock(&info->shared->mutexs[FINMEAL]);
-	if (info->shared->done_eating == info->shared->nb_philos)
+	if (info->shared->done_eating >= info->shared->nb_philos)
 	{
 		pthread_mutex_lock(&info->shared->mutexs[EOS]);
 		info->shared->flag_eos = 1;
