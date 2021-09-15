@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/15 15:15:45 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/15 15:55:07 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef enum e_mutex_type
 {
 	EOS,
 	PRINT,
+	FINMEAL,
 	LASTMEAL,
 	TOTAL
 }			t_mutex_type;
@@ -61,6 +62,7 @@ typedef struct s_shared
 	int				time2sleep;
 	int				nb_eat;
 	int				flag_eos;
+	int				done_eating;
 	pthread_mutex_t	*mutex_forks;
 	pthread_mutex_t	*mutexs;
 }			t_shared;
@@ -69,6 +71,7 @@ typedef struct s_info
 {
 	t_shared	*shared;
 	int			philo_id;
+	int			time_ate;
 	int64_t		ts_lastmeal;
 }			t_info;
 

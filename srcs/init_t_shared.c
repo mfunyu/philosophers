@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 17:23:05 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/15 16:01:44 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	init_t_shared(t_shared **shared, int ac, char **av)
 	if (ac == 6)
 		shared_p->nb_eat = ft_atoi(av[5]);
 	shared_p->flag_eos = 0;
+	shared_p->done_eating = 0;
 	shared_p->arr_forks = (int *)
 		malloc((shared_p->nb_philos + 1) * sizeof(int));
 	if (!shared_p->arr_forks)

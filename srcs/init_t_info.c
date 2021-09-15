@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 17:23:33 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/15 16:02:06 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	init_t_info(t_info **info, t_shared *shared)
 	{
 		info_p->shared = shared;
 		info_p->philo_id = i + 1;
+		info_p->time_ate = 0;
 		info_p->ts_lastmeal = 0;
 		info_p++;
 		i++;
