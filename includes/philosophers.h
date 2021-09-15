@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 14:43:56 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/15 15:15:45 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int		threads_start(t_info *info);
 /*
 ** threads
 */
-void	*thread_philo(void *arg);
-void	*thread_monitor(void *arg);
-void	*thread_end_monitor(void *arg);
+void	*philosopher_thread(void *arg);
+void	*monitor_thread(void *arg);
+void	*end_observer_thread(void *arg);
 
 /*
 ** actions

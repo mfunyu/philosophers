@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_end_monitor.c                               :+:      :+:    :+:   */
+/*   end_observer_thread.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-void	*thread_end_monitor(void *arg)
+void	*end_observer_thread(void *arg)
 {
 	t_info	*info;
 

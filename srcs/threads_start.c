@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:13:50 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 17:27:36 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/15 15:15:45 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	threads_start(t_info *info)
 	i = 0;
 	while (i < info->shared->nb_philos)
 	{
-		if (_thread_start(thread_philo, info + i, DETACH))
+		if (_thread_start(philosopher_thread, info + i, DETACH))
 			return (ERROR);
-		if (_thread_start(thread_monitor, info + i, DETACH))
+		if (_thread_start(monitor_thread, info + i, DETACH))
 			return (ERROR);
 		i++;
 	}
-	if (_thread_start(thread_end_monitor, info + i, JOIN))
+	if (_thread_start(end_observer_thread, info + i, JOIN))
 		return (ERROR);
 	return (SUCCESS);
 }
