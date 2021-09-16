@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:00:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/14 14:44:03 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/16 14:16:39 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int64_t	print_timestamp_log(t_info *info, t_action action)
 	char	*status;
 	int64_t	timestamp_in_ms;
 
-	if (action == FORK)
+	if (is_eos(info))
+		return (0);
+	else if (action == DIE)
+		status = "died";
+	else if (action == FORK)
 		status = "has taken a fork";
 	else if (action == EAT)
 		status = "is eating";
@@ -25,8 +29,6 @@ int64_t	print_timestamp_log(t_info *info, t_action action)
 		status = "is sleeping";
 	else if (action == THINK)
 		status = "is thinking";
-	else if (action == DIE)
-		status = "died";
 	timestamp_in_ms = get_timestamp_ms();
 	if (timestamp_in_ms == ERROR)
 		return (ERROR);

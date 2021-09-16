@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/15 16:28:13 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/16 14:12:37 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	*monitor_thread(void *arg)
 		if (info->ts_lastmeal
 			&& get_timestamp_ms() - info->ts_lastmeal >= info->shared->time2die)
 		{
+			print_timestamp_log(info, DIE);
 			pthread_mutex_lock(&info->shared->mutexs[EOS]);
 			info->shared->flag_eos = 1;
 			pthread_mutex_unlock(&info->shared->mutexs[EOS]);
-			print_timestamp_log(info, DIE);
 			return (NULL);
 		}
 		if (info->cnt_meal >= info->shared->nb_eat)
