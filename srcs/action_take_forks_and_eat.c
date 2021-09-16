@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_take_forks.c                                :+:      :+:    :+:   */
+/*   action_take_forks_and_eat.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/15 16:28:05 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/16 09:17:03 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	_set_ts_and_cnt_meal(t_info *info, int64_t timestamp, bool update)
 	pthread_mutex_unlock(&info->shared->mutexs[PHILOMEAL + info->philo_id]);
 }
 
-int	take_a_fork(t_info *info, int fork_nb, int hand)
+int	take_a_fork(t_info *info, int fork_nb)
 {
 	bool	got_fork;
 	int64_t	timestamp;
@@ -44,25 +44,23 @@ int	take_a_fork(t_info *info, int fork_nb, int hand)
 		}
 		pthread_mutex_unlock(&info->shared->mutex_forks[fork_nb]);
 	}
-	if (hand == LEFT)
-	{
-		timestamp = print_timestamp_log(info, EAT);
-		_set_ts_and_cnt_meal(info, timestamp, true);
-		ms_sleep(info->shared->time2eat);
-	}
 	return (SUCCESS);
 }
 
-int	action_take_forks(t_info *info)
+int	action_take_forks_and_eat(t_info *info)
 {
 	int		right;
 	int		left;
+	int64_t	timestamp;
 
 	right = info->philo_id;
 	if (info->philo_id == info->shared->nb_philos)
 		right = 0;
 	left = info->philo_id - 1;
-	take_a_fork(info, right, RIGHT);
-	take_a_fork(info, left, LEFT);
+	take_a_fork(info, right);
+	take_a_fork(info, left);
+	timestamp = print_timestamp_log(info, EAT);
+	_set_ts_and_cnt_meal(info, timestamp, true);
+	ms_sleep(info->shared->time2eat);
 	return (SUCCESS);
 }

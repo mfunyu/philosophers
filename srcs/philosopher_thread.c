@@ -32,7 +32,7 @@ void	*philosopher_thread(void *arg)
 	pthread_mutex_unlock(&info->shared->mutexs[PHILOMEAL + info->philo_id]);
 	while (1)
 	{
-		if (action(action_take_forks, info))
+		if (action(action_take_forks_and_eat, info))
 			return (NULL);
 		if (action(action_drop_fork_and_sleep, info))
 			return (NULL);

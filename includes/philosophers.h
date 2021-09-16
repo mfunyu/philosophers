@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/15 16:06:21 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/16 09:17:20 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	*end_observer_thread(void *arg);
 /*
 ** actions
 */
-int		action_take_forks(t_info *info);
+int		action_take_forks_and_eat(t_info *info);
 int		action_drop_fork_and_sleep(t_info *info);
 int		action_think(t_info *info);
 
