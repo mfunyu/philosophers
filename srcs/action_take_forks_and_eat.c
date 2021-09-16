@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_take_forks_and_eat.c                                :+:      :+:    :+:   */
+/*   action_take_forks_and_eat.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/16 09:17:03 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/16 14:55:32 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	_set_ts_and_cnt_meal(t_info *info, int64_t timestamp, bool update)
 	else if (update)
 	{
 		info->ts_lastmeal = timestamp;
-		if (info->cnt_meal >=0)
+		if (info->cnt_meal >= 0)
 			info->cnt_meal++;
 	}
 	pthread_mutex_unlock(&info->shared->mutexs[PHILOMEAL + info->philo_id]);
