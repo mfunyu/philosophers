@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/16 09:17:20 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/17 16:57:30 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	ms_sleep(int time);
 */
 int		error_return(char *error_msg);
 
-void	null_free(void *used);
+void	clean(t_shared *shared);
 
 /*
 ** utils
