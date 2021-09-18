@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:35:23 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/15 16:18:14 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/18 19:53:45 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	action_drop_fork_and_sleep(t_info *info)
 		right = 0;
 	left = info->philo_id - 1;
 	print_timestamp_log(info, SLEEP);
-	pthread_mutex_lock(&info->shared->mutex_forks[right]);
-	info->shared->arr_forks[right] = 0;
-	pthread_mutex_unlock(&info->shared->mutex_forks[right]);
 	pthread_mutex_lock(&info->shared->mutex_forks[left]);
 	info->shared->arr_forks[left] = 0;
 	pthread_mutex_unlock(&info->shared->mutex_forks[left]);
+	pthread_mutex_lock(&info->shared->mutex_forks[right]);
+	info->shared->arr_forks[right] = 0;
+	pthread_mutex_unlock(&info->shared->mutex_forks[right]);
 	ms_sleep(info->shared->time2sleep);
 	return (SUCCESS);
 }
