@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/19 15:01:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:19:46 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	_set_ts_and_cnt_meal(t_info *info, int64_t timestamp, bool update)
 	pthread_mutex_unlock(&info->shared->mutexs[PHILOMEAL + info->philo_id]);
 }
 
-int	take_a_fork(t_info *info, int fork_nb)
+static int	_take_a_fork(t_info *info, int fork_nb)
 {
 	bool	got_fork;
 	int64_t	timestamp;
@@ -59,8 +59,8 @@ int	action_take_forks_and_eat(t_info *info)
 	if (info->philo_id == info->shared->nb_philos)
 		right = 0;
 	left = info->philo_id - 1;
-	take_a_fork(info, right);
-	take_a_fork(info, left);
+	_take_a_fork(info, right);
+	_take_a_fork(info, left);
 	timestamp = print_timestamp_log(info, EAT);
 	_set_ts_and_cnt_meal(info, timestamp, true);
 	ms_sleep(info->shared->time2eat);

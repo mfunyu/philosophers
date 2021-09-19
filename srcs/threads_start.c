@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:13:50 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/15 15:15:45 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:16:07 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	_thread_start(void *(*func)(void *), t_info *info, t_th_type type)
 		if (pthread_detach(thread))
 			return (error_return("pthread_detach failed"));
 	}
-	else
+	else if (type == JOIN)
 	{
 		if (pthread_join(thread, NULL))
 			return (error_return("pthread_join failed"));
