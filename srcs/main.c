@@ -25,6 +25,8 @@ int	check_args(int ac, char **av)
 		ret = ft_atoi_check(av[i], &error);
 		if (ret < 0)
 			error = ERROR;
+		if (i == 1 && ret == 0)
+			error = ERROR;
 		i++;
 	}
 	if (error)
@@ -38,7 +40,7 @@ int	main(int ac, char **av)
 	t_info		*info;
 
 	if (ac < 5 || ac > 6 || check_args(ac, av))
-		return (error_return("Invalid Arguments"));
+		return (error_return("invalid arguments"));
 	if (init_t_shared(&shared, ac, av))
 		return (ERROR);
 	if (init_mutexes(&shared))
