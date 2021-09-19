@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:00:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/19 15:09:01 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:37:58 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int64_t	print_timestamp_log(t_info *info, t_action action)
 
 	status = "";
 	if (is_eos(info))
-		return (0);
+		return (ERROR);
 	else if (action == DIE)
 		status = "died";
 	else if (action == FORK)
@@ -36,7 +36,7 @@ int64_t	print_timestamp_log(t_info *info, t_action action)
 		return (ERROR);
 	printf("%"PRId64" %d %s\n", timestamp_in_ms, info->philo_id, status);
 	if (action == DIE)
-		return (0);
+		return (ERROR);
 	pthread_mutex_unlock(&info->shared->mutexs[PRINT]);
 	return (timestamp_in_ms);
 }

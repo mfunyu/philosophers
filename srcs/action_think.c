@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 17:13:09 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/13 17:14:31 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:40:17 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	action_think(t_info *info)
 {
-	print_timestamp_log(info, THINK);
+	if (print_timestamp_log(info, THINK) == ERROR)
+		return (ERROR);
 	return (SUCCESS);
 }

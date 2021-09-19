@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/19 15:19:46 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:38:44 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	_take_a_fork(t_info *info, int fork_nb)
 			info->shared->arr_forks[fork_nb] = info->philo_id;
 			got_fork = true;
 			timestamp = print_timestamp_log(info, FORK);
+			if (timestamp == ERROR)
+				return (ERROR);
 			_set_ts_and_cnt_meal(info, timestamp, false);
 		}
 		pthread_mutex_unlock(&info->shared->mutex_forks[fork_nb]);
@@ -59,9 +61,13 @@ int	action_take_forks_and_eat(t_info *info)
 	if (info->philo_id == info->shared->nb_philos)
 		right = 0;
 	left = info->philo_id - 1;
-	_take_a_fork(info, right);
-	_take_a_fork(info, left);
+	if (_take_a_fork(info, right))
+		return (ERROR);
+	if (_take_a_fork(info, left))
+		return (ERROR);
 	timestamp = print_timestamp_log(info, EAT);
+	if (timestamp == ERROR)
+		return (ERROR);
 	_set_ts_and_cnt_meal(info, timestamp, true);
 	ms_sleep(info->shared->time2eat);
 	return (SUCCESS);
