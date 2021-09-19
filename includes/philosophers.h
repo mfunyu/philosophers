@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/17 16:57:30 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:53:55 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_shared
 	int				flag_eos;
 	int				done_eating;
 	pthread_mutex_t	*mutex_forks;
-	pthread_mutex_t	*mutexs;
+	pthread_mutex_t	*mutexes;
 }			t_shared;
 
 typedef struct s_info

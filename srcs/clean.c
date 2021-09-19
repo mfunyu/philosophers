@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   null_free.c                                        :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 22:13:30 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/17 16:57:02 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:53:55 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	clean(t_shared *shared)
 	i = 0;
 	while (i < TOTAL + shared->nb_philos)
 	{
-		pthread_mutex_destroy(shared->mutexs);
+		pthread_mutex_destroy(shared->mutexes);
 		i++;
 	}
 	_null_free(shared->mutex_forks);
-	_null_free(shared->mutexs);
+	_null_free(shared->mutexes);
 	_null_free(shared->arr_forks);
 	_null_free(shared);
 }

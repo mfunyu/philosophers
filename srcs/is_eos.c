@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 10:04:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/16 14:11:49 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:53:55 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 bool	is_eos(t_info *info)
 {
-	pthread_mutex_lock(&info->shared->mutexs[EOS]);
+	pthread_mutex_lock(&info->shared->mutexes[EOS]);
 	if (info->shared->flag_eos == 1)
 	{
-		pthread_mutex_unlock(&info->shared->mutexs[EOS]);
+		pthread_mutex_unlock(&info->shared->mutexes[EOS]);
 		return (true);
 	}
-	pthread_mutex_unlock(&info->shared->mutexs[EOS]);
+	pthread_mutex_unlock(&info->shared->mutexes[EOS]);
 	return (false);
 }
