@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:00:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/16 14:16:39 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:09:01 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int64_t	print_timestamp_log(t_info *info, t_action action)
 	char	*status;
 	int64_t	timestamp_in_ms;
 
+	status = "";
 	if (is_eos(info))
 		return (0);
 	else if (action == DIE)
@@ -29,10 +30,10 @@ int64_t	print_timestamp_log(t_info *info, t_action action)
 		status = "is sleeping";
 	else if (action == THINK)
 		status = "is thinking";
+	pthread_mutex_lock(&info->shared->mutexs[PRINT]);
 	timestamp_in_ms = get_timestamp_ms();
 	if (timestamp_in_ms == ERROR)
 		return (ERROR);
-	pthread_mutex_lock(&info->shared->mutexs[PRINT]);
 	printf("%"PRId64" %d %s\n", timestamp_in_ms, info->philo_id, status);
 	if (action == DIE)
 		return (0);
