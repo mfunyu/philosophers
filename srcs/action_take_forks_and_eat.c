@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/16 14:55:32 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 15:01:22 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	take_a_fork(t_info *info, int fork_nb)
 			_set_ts_and_cnt_meal(info, timestamp, false);
 		}
 		pthread_mutex_unlock(&info->shared->mutex_forks[fork_nb]);
+		if (!got_fork)
+			usleep(200);
 	}
 	return (SUCCESS);
 }

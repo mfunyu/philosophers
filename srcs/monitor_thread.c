@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/16 14:12:37 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 14:37:43 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	*monitor_thread(void *arg)
 			pthread_mutex_unlock(&info->shared->mutexs[FINMEAL]);
 		}
 		pthread_mutex_unlock(&info->shared->mutexs[PHILOMEAL + info->philo_id]);
+		usleep(200);
 	}
 	return (NULL);
 }

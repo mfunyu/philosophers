@@ -6,20 +6,11 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 14:55:20 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/16 14:55:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/19 14:53:56 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int	action(int (*func)(t_info *), t_info *info)
-{
-	if (is_eos(info))
-		return (ERROR);
-	if (func(info))
-		return (ERROR);
-	return (SUCCESS);
-}
 
 void	*philosopher_thread(void *arg)
 {
@@ -32,11 +23,11 @@ void	*philosopher_thread(void *arg)
 	pthread_mutex_unlock(&info->shared->mutexs[PHILOMEAL + info->philo_id]);
 	while (1)
 	{
-		if (action(action_take_forks_and_eat, info))
+		if (action_take_forks_and_eat(info))
 			return (NULL);
-		if (action(action_drop_fork_and_sleep, info))
+		if (action_drop_fork_and_sleep(info))
 			return (NULL);
-		if (action(action_think, info))
+		if (action_think(info))
 			return (NULL);
 	}
 	return (NULL);
