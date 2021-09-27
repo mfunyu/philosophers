@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/19 15:53:55 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/28 00:46:47 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # define SUCCESS 0
 # define ERROR 1
+# define ERROR_INT INT_MAX
 
 # define RIGHT 0
 # define LEFT 1
@@ -82,6 +83,8 @@ int		init_t_shared(t_shared **shared, int ac, char **av);
 int		init_t_info(t_info **info, t_shared *shared);
 int		init_mutexes(t_shared **shared);
 
+int		set_ms_sleep(void);
+
 int		threads_start(t_info *info);
 
 /*
@@ -101,7 +104,7 @@ int		action_think(t_info *info);
 bool	is_eos(t_info *info);
 int64_t	get_timestamp_ms(void);
 int64_t	print_timestamp_log(t_info *info, t_action action);
-void	ms_sleep(int time);
+int		ms_sleep(int time);
 
 /*
 ** error
