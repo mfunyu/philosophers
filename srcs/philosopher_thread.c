@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 14:55:20 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/19 15:53:55 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/09/30 15:57:00 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	*philosopher_thread(void *arg)
 	t_info	*info;
 
 	info = (t_info *)arg;
-	pthread_mutex_lock(&info->shared->mutexes[PHILOMEAL + info->philo_id]);
+	// pthread_mutex_lock(&info->shared->mutexes[PHILOMEAL + info->philo_id]);
 	if (!info->ts_lastmeal && info->philo_id % 2)
 		usleep(200);
-	pthread_mutex_unlock(&info->shared->mutexes[PHILOMEAL + info->philo_id]);
+	// pthread_mutex_unlock(&info->shared->mutexes[PHILOMEAL + info->philo_id]);
 	while (1)
 	{
 		if (action_take_forks_and_eat(info))
