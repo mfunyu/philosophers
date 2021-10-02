@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/28 00:46:47 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/02 12:09:54 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ typedef struct s_info
 int		init_t_shared(t_shared **shared, int ac, char **av);
 int		init_t_info(t_info **info, t_shared *shared);
 int		init_mutexes(t_shared **shared);
-
-int		set_ms_sleep(void);
 
 int		threads_start(t_info *info);
 

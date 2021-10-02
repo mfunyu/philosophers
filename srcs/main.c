@@ -47,8 +47,6 @@ int	main(int ac, char **av)
 		return (ERROR);
 	if (init_t_info(&info, shared))
 		return (ERROR);
-	if (set_ms_sleep())
-		return (ERROR);
 	if (threads_start(info))
 		return (ERROR);
 	clean(shared);
