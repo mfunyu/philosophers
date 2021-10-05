@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/19 15:53:55 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/05 21:46:09 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	_set_ts_and_cnt_meal(t_info *info, int64_t timestamp, bool update)
 {
-	pthread_mutex_lock(&info->shared->mutexes[PHILOMEAL + info->philo_id]);
 	if (!info->ts_lastmeal)
 		info->ts_lastmeal = timestamp;
 	else if (update)
@@ -23,7 +22,6 @@ static void	_set_ts_and_cnt_meal(t_info *info, int64_t timestamp, bool update)
 		if (info->cnt_meal >= 0)
 			info->cnt_meal++;
 	}
-	pthread_mutex_unlock(&info->shared->mutexes[PHILOMEAL + info->philo_id]);
 }
 
 static int	_take_a_fork(t_info *info, int fork_nb)
