@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/10/05 22:21:43 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/10/05 22:38:44 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ SRCS	:= $(shell find ./srcs -type f -name "*.c" | cut -c 8-100)
 OBJS	:= $(SRCS:%.c=$(VPATH)%.o)
 
 INCLUDES:= -I./includes
-DSTRCTR	:= ./tests/destructor.c
 TESTER	:= tester_philosophers
+DSTRCTR	:= ./${TESTER}/destructor.c
 
 CC		:= gcc
 CFLAGS	:= -Wall -Wextra -Werror $(INCLUDES)
@@ -45,6 +45,9 @@ dbg	: $(OBJS) ## Run with -fsanitize=address
 leak_Linux	: dbg
 
 leak_Darwin	: $(OBJS)
+ifneq ($(shell echo ${TESTER}), $(shell ls | grep ${TESTER}))
+	git clone https://github.com/mfunyu/${TESTER}.git
+endif
 	$(CC) $(CFLAGS) $(OBJS) $(DSTRCTR) -o $(NAME)
 
 leak	: leak_$(shell uname) ## Run leak check
