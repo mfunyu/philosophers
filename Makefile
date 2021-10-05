@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/08/21 00:14:49 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/10/05 22:21:43 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ OBJS	:= $(SRCS:%.c=$(VPATH)%.o)
 
 INCLUDES:= -I./includes
 DSTRCTR	:= ./tests/destructor.c
+TESTER	:= tester_philosophers
 
 CC		:= gcc
 CFLAGS	:= -Wall -Wextra -Werror $(INCLUDES)
@@ -49,10 +50,16 @@ leak_Darwin	: $(OBJS)
 leak	: leak_$(shell uname) ## Run leak check
 
 norm	: ## Run norm check
-	./tests/norm.sh
+ifneq ($(shell echo ${TESTER}), $(shell ls | grep ${TESTER}))
+	git clone https://github.com/mfunyu/${TESTER}.git
+endif
+	./${TESTER}/norm.sh
 
 test	: ## Run all test scripts
-	./tests/test.sh
+ifneq ($(shell echo ${TESTER}), $(shell ls | grep ${TESTER}))
+	git clone https://github.com/mfunyu/${TESTER}.git
+endif
+	./${TESTER}/test.sh
 
 help	: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+.*:.*?## .*$$' $(MAKEFILE_LIST) \
