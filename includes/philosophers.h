@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/02 12:09:54 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/05 21:46:52 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef enum e_mutex_type
 	EOS,
 	PRINT,
 	FINMEAL,
-	PHILOMEAL,
 	TOTAL
 }			t_mutex_type;
 
