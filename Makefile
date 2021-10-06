@@ -6,14 +6,32 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/10/05 22:38:44 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/10/06 02:06:27 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= philo
 VPATH	:= ./srcs/
-SRCS	:= $(shell find ./srcs -type f -name "*.c" | cut -c 8-100)
-#SRCS	:= main.c
+SRCS	:= main.c \
+		get_timestamp_ms.c \
+		init_mutexes.c \
+		philosopher_thread.c \
+		error_return.c \
+		action_drop_fork_and_sleep.c \
+		threads_start.c \
+		monitor_thread.c \
+		is_eos.c \
+		print_timestamp_log.c \
+		action_think.c \
+		clean.c \
+		init_t_shared.c \
+		init_t_info.c \
+		ms_sleep.c \
+		action_take_forks_and_eat.c \
+		end_observer_thread.c \
+		utils/ft_putstr_fd.c \
+		utils/ft_atoi_check.c \
+		utils/ft_atoi.c
 OBJS	:= $(SRCS:%.c=$(VPATH)%.o)
 
 INCLUDES:= -I./includes
