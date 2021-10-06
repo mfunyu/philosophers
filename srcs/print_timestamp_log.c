@@ -30,10 +30,10 @@ int64_t	print_timestamp_log(t_info *info, t_action action)
 		status = "is sleeping";
 	else if (action == THINK)
 		status = "is thinking";
+	pthread_mutex_lock(&info->shared->mutexes[PRINT]);
 	timestamp_in_ms = get_timestamp_ms();
 	if (timestamp_in_ms == ERROR)
 		return (ERROR);
-	pthread_mutex_lock(&info->shared->mutexes[PRINT]);
 	printf("%"PRId64" %d %s\n", timestamp_in_ms, info->philo_id, status);
 	if (action == DIE)
 		return (ERROR);
