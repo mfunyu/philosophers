@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_sleep.c                                         :+:      :+:    :+:   */
+/*   msleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:45:32 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/02 12:05:25 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/08 21:48:23 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ms_sleep(int time)
+int	msleep(int msec)
 {
-	usleep(time * 1000 * 0.95);
+	int64_t		end;
+	int64_t		left;
+
+	end = get_time_in_ms() + msec;
+	left = end - get_time_in_ms();
+	while (left > 2000)
+	{
+		usleep(left / 2);
+		left = end - get_time_in_ms();
+	}
+	while (left)
+	{
+		usleep(10);
+		left = end - get_time_in_ms();
+	}
 	return (0);
 }

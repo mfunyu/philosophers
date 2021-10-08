@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/05 21:46:09 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/08 21:48:41 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int	action_take_forks_and_eat(t_info *info)
 	if (timestamp == ERROR)
 		return (ERROR);
 	_set_ts_and_cnt_meal(info, timestamp, true);
-	ms_sleep(info->shared->time2eat);
+	msleep(info->shared->time2eat);
 	return (SUCCESS);
 }
