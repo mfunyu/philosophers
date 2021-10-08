@@ -6,14 +6,14 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/10/06 02:06:27 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/10/08 12:46:04 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= philo
 VPATH	:= ./srcs/
 SRCS	:= main.c \
-		get_timestamp_ms.c \
+		get_time_in_ms.c \
 		init_mutexes.c \
 		philosopher_thread.c \
 		error_return.c \

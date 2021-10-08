@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:00:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/28 16:16:48 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/08 12:46:04 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int64_t	print_timestamp_log(t_info *info, t_action action)
 	else if (action == THINK)
 		status = "is thinking";
 	pthread_mutex_lock(&info->shared->mutexes[PRINT]);
-	timestamp_in_ms = get_timestamp_ms();
+	timestamp_in_ms = get_time_in_ms();
 	if (timestamp_in_ms == ERROR)
 		return (ERROR);
 	printf("%"PRId64" %d %s\n", timestamp_in_ms, info->philo_id, status);
