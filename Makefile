@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/10/11 15:02:27 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/10/11 15:58:24 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,12 @@ CC		:= gcc
 CFLAGS	:= -Wall -Wextra -Werror $(INCLUDES)
 GFLAGS	:= $(CFLAGS) -fsanitize=address
 
-.PHONY	: all clean fclean re dbg leak leak_Darwin leak_Linux norm test help
+.PHONY	: all clean fclean re
 
 all	: $(NAME) ## Compile all
 
 $(NAME)	: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $^ -o $@
 
 clean	: ## Remove object files
 	$(RM) $(OBJS)
@@ -60,30 +60,27 @@ fclean	: clean ## Remove target files
 
 re	: fclean all ## Run fclean all
 
-dbg	: $(OBJS) ## Run with -fsanitize=address
-	$(CC) $(GFLAGS) $(OBJS) -o $(NAME)
 
-leak_Linux	: dbg
+#################################################
 
-leak_Darwin	: $(OBJS)
-ifneq ($(shell echo ${TESTER}), $(shell ls | grep ${TESTER}))
+.PHONY	: norm test leak leak_Darwin leak_Linux help
+
+${TESTER}	:
 	git clone https://github.com/mfunyu/${TESTER}.git
-endif
+
+norm	: ${TESTER} ## Run norm check
+	./${TESTER}/norm.sh
+
+test	: ${TESTER} ## Run all test scripts
+	./${TESTER}/test.sh
+
+leak_Linux	:
+	$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o $(NAME)
+
+leak_Darwin	: $(OBJS) ${TESTER}
 	$(CC) $(CFLAGS) $(OBJS) $(DSTRCTR) -o $(NAME)
 
 leak	: leak_$(shell uname) ## Run leak check
-
-norm	: ## Run norm check
-ifneq ($(shell echo ${TESTER}), $(shell ls | grep ${TESTER}))
-	git clone https://github.com/mfunyu/${TESTER}.git
-endif
-	./${TESTER}/norm.sh
-
-test	: ## Run all test scripts
-ifneq ($(shell echo ${TESTER}), $(shell ls | grep ${TESTER}))
-	git clone https://github.com/mfunyu/${TESTER}.git
-endif
-	./${TESTER}/test.sh
 
 help	: ## Display this help screen
 	@grep -E '^[a-zA-Z_-]+.*:.*?## .*$$' $(MAKEFILE_LIST) \
