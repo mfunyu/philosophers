@@ -15,7 +15,7 @@
 #include "inits.h"
 #include "error.h"
 
-int	check_args(int ac, char **av)
+static int	_check_args(const int ac, const char **av)
 {
 	int		i;
 	int		ret;
@@ -42,7 +42,7 @@ int	philosophers(int ac, char **av)
 	t_shared	*shared;
 	t_info		*info;
 
-	if (ac < 5 || ac > 6 || check_args(ac, av))
+	if (ac < 5 || ac > 6 || _check_args(ac, (const char **)av))
 		return (error_return("invalid arguments"));
 	if (init_t_shared(&shared, ac, av))
 		return (ERROR);
