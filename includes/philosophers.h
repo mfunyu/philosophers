@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 12:45:10 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 13:43:54 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,5 @@ int		msleep(int64_t time_sleep_start, int msec);
 int		error_return(char *error_msg);
 
 void	clean(t_shared *shared);
-
-/*
-** utils
-*/
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-int		ft_atoi(const char *n);
-int		ft_atoi_check(const char *n, int *error);
 
 #endif

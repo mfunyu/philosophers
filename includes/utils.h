@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/17 04:06:37 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 13:16:20 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/10/11 13:07:54 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/10/11 13:43:39 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include <unistd.h>
+#ifndef UTILS_H
+# define UTILS_H
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
-}
+# include <stddef.h>
+
+size_t	ft_strlen(const char *str);
+
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
+
+int		ft_atoi(const char *n);
+int		ft_atoi_check(const char *n, int *error);
+
+#endif
