@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 13:43:54 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 13:51:08 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,6 @@ int		threads_start(t_info *info);
 void	*philosopher_thread(void *arg);
 void	*monitor_thread(void *arg);
 void	*end_observer_thread(void *arg);
-
-/*
-** actions
-*/
-int		action_take_forks_and_eat(t_info *info);
-int		action_drop_fork_and_sleep(t_info *info);
-int		action_think(t_info *info);
 
 bool	is_eos(t_info *info);
 int64_t	get_time_in_ms(void);
