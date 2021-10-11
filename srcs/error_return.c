@@ -6,11 +6,12 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 07:57:26 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 13:18:49 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:02:06 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "utils.h"
 
 int	error_return(char *error_msg)
 {

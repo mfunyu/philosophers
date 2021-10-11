@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/10/08 21:48:41 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/10/11 13:19:16 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SRCS	:= main.c \
 		action_take_forks_and_eat.c \
 		end_observer_thread.c \
 		utils/ft_putstr_fd.c \
+		utils/ft_putendl_fd.c \
+		utils/ft_strlen.c \
 		utils/ft_atoi_check.c \
 		utils/ft_atoi.c
 OBJS	:= $(SRCS:%.c=$(VPATH)%.o)

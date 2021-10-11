@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "utils.h"
 
 int	check_args(int ac, char **av)
 {

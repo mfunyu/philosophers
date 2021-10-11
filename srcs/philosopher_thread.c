@@ -6,11 +6,12 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 14:55:20 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/05 21:45:46 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 13:52:35 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "actions.h"
 
 void	*philosopher_thread(void *arg)
 {

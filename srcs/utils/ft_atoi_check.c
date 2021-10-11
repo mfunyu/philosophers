@@ -6,11 +6,12 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 22:23:58 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 13:45:47 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 13:46:43 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include <limits.h>
+#include <stdbool.h>
 
 static const char	*_skip_spaces(const char *str)
 {
