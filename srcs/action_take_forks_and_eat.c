@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 12:39:24 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 12:45:53 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	action_take_forks_and_eat(t_info *info)
 {
 	int		right;
 	int		left;
-	int64_t	timestamp;
+	int64_t	time_eat_start;
 
 	right = info->philo_id;
 	if (info->philo_id == info->shared->nb_philos)
@@ -64,10 +64,10 @@ int	action_take_forks_and_eat(t_info *info)
 		return (ERROR);
 	if (_take_a_fork(info, left))
 		return (ERROR);
-	timestamp = print_timestamp_log(info, EAT);
-	if (timestamp == ERROR)
+	time_eat_start = print_timestamp_log(info, EAT);
+	if (time_eat_start == ERROR)
 		return (ERROR);
-	_set_ts_and_cnt_meal(info, timestamp, true);
-	msleep(info->shared->time2eat);
+	_set_ts_and_cnt_meal(info, time_eat_start, true);
+	msleep(time_eat_start, info->shared->time2eat);
 	return (SUCCESS);
 }

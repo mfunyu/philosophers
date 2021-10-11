@@ -12,14 +12,16 @@
 
 #include "philosophers.h"
 
-int	msleep(int msec)
+#define MAX_DELAY 10000
+
+int	msleep(int64_t time_sleep_start, int msec)
 {
 	int64_t		end;
 	int64_t		left;
 
-	end = get_time_in_ms() + msec;
+	end = time_sleep_start + msec;
 	left = end - get_time_in_ms();
-	while (left > 2000)
+	while (left > MAX_DELAY)
 	{
 		usleep(left / 2);
 		left = end - get_time_in_ms();
