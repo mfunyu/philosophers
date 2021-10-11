@@ -6,13 +6,14 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/10/11 14:45:13 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/10/11 15:02:27 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= philo
 VPATH	:= ./srcs/
 SRCS	:= main.c \
+		philosophers.c \
 		get_time_in_ms.c \
 		error_return.c \
 		is_eos.c \
