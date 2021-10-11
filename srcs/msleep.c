@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <unistd.h>
 
 #define MAX_DELAY 10000
 

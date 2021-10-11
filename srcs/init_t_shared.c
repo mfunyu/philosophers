@@ -6,12 +6,15 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:02:17 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:32:22 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo_struct.h"
 #include "utils.h"
+#include <string.h>
+#include <stdlib.h>
 
 int	init_t_shared(t_shared **shared, int ac, char **av)
 {

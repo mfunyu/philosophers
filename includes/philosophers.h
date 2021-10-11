@@ -6,22 +6,15 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:05:41 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:29:57 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/time.h>
-# include <pthread.h>
-# include <limits.h>
-# include <stdbool.h>
-# include <inttypes.h>
+# include <stdbool.h> /* bool */
+# include <inttypes.h> /* int64_t */
 
 # define SUCCESS 0
 # define ERROR 1
@@ -54,27 +47,8 @@ typedef enum e_mutex_type
 	TOTAL
 }			t_mutex_type;
 
-typedef struct s_shared
-{
-	int				*arr_forks;
-	int				nb_philos;
-	int				time2die;
-	int				time2eat;
-	int				time2sleep;
-	int				nb_eat;
-	int				flag_eos;
-	int				done_eating;
-	pthread_mutex_t	*mutex_forks;
-	pthread_mutex_t	*mutexes;
-}			t_shared;
-
-typedef struct s_info
-{
-	t_shared	*shared;
-	int			philo_id;
-	int			cnt_meal;
-	int64_t		ts_lastmeal;
-}			t_info;
+typedef struct s_shared	t_shared;
+typedef struct s_info	t_info;
 
 /*
 ** inits

@@ -6,11 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:13:43 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:37:42 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo_struct.h"
+#include <unistd.h>
 
 void	*thread_monitor(void *arg)
 {

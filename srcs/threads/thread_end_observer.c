@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end_observer_thread.c                              :+:      :+:    :+:   */
+/*   thread_end_observer.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:43:05 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:12:39 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:39:20 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo_struct.h"
+#include <stddef.h>
+#include <unistd.h>
 
 static bool	_is_meal_finished(t_info *info)
 {

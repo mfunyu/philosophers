@@ -6,11 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 22:13:30 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/19 15:53:55 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:31:43 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo_struct.h"
+#include <stdlib.h>
 
 static void	_null_free(void *used)
 {

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <stddef.h>
+#include <sys/time.h>
 
 int64_t	get_time_in_ms(void)
 {

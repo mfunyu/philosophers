@@ -6,11 +6,14 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 12:34:58 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:29:24 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo_struct.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 int	init_mutexes(t_shared **shared)
 {

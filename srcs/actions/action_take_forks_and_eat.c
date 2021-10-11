@@ -6,11 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:15:41 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 12:45:53 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:36:22 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo_struct.h"
+#include <unistd.h>
 
 static void	_set_ts_and_cnt_meal(t_info *info, int64_t timestamp, bool update)
 {

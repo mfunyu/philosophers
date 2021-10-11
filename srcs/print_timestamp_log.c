@@ -6,11 +6,14 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:00:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/08 12:46:04 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:31:12 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo_struct.h"
+#include <stdio.h>
+#include <pthread.h>
 
 int64_t	print_timestamp_log(t_info *info, t_action action)
 {
