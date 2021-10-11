@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 22:23:58 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/12 08:10:19 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 13:45:47 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ static const char	*_skip_spaces(const char *str)
 	return (str);
 }
 
-int	ft_atoi_check(const char *n, int *error)
+int	ft_atoi_check(const char *n, int *is_error)
 {
 	long long	nb;
 	int			sign;
 
 	nb = 0;
 	sign = 1;
-	*error = ERROR;
+	*is_error = true;
 	n = _skip_spaces(n);
 	sign = 1;
 	if (*n == '-' || *n == '+')
 		sign = 44 - *n++;
 	while ('0' <= *n && *n <= '9')
 	{
-		*error = 1;
+		*is_error = -1;
 		nb = nb * 10 + (*n++ - '0');
 		if (nb * sign < INT_MIN || INT_MAX < nb * sign)
 		{
-			*error = ERROR;
+			*is_error = true;
 			return (0);
 		}
 	}
-	if (*error == 1 && *n == '\0')
-		*error = SUCCESS;
+	if (*is_error == -1 && *n == '\0')
+		*is_error = false;
 	return ((int)(nb * sign));
 }
