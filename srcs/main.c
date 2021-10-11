@@ -12,6 +12,7 @@
 
 #include "philosophers.h"
 #include "utils.h"
+#include "inits.h"
 
 int	check_args(int ac, char **av)
 {
