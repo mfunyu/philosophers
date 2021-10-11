@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/10/11 14:09:39 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/10/11 14:13:43 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,20 +15,20 @@ VPATH	:= ./srcs/
 SRCS	:= main.c \
 		get_time_in_ms.c \
 		init_mutexes.c \
-		philosopher_thread.c \
 		error_return.c \
-		threads_start.c \
-		monitor_thread.c \
 		is_eos.c \
 		print_timestamp_log.c \
 		clean.c \
 		init_t_shared.c \
 		init_t_info.c \
 		msleep.c \
+		threads/threads_start.c \
+		threads/thread_philosopher.c \
+		threads/thread_monitor.c \
+		threads/thread_end_observer.c \
 		actions/action_drop_fork_and_sleep.c \
 		actions/action_take_forks_and_eat.c \
 		actions/action_think.c \
-		end_observer_thread.c \
 		utils/ft_putstr_fd.c \
 		utils/ft_putendl_fd.c \
 		utils/ft_strlen.c \

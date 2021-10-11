@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:43:05 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/09/19 15:53:55 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:12:39 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	_is_meal_finished(t_info *info)
 	return (false);
 }
 
-void	*end_observer_thread(void *arg)
+void	*thread_end_observer(void *arg)
 {
 	t_info	*info;
 

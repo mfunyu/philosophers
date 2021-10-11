@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor_thread.c                                   :+:      :+:    :+:   */
+/*   thread_monitor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 12:39:42 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:13:43 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*monitor_thread(void *arg)
+void	*thread_monitor(void *arg)
 {
 	t_info	*info;
 	int64_t	time_passed;

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher_thread.c                               :+:      :+:    :+:   */
+/*   thread_philosopher.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 14:55:20 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 13:52:35 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:13:35 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "actions.h"
 
-void	*philosopher_thread(void *arg)
+void	*thread_philosopher(void *arg)
 {
 	t_info	*info;
 
