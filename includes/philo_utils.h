@@ -15,10 +15,10 @@
 
 # include <stdbool.h> /* bool */
 # include <inttypes.h> /* int64_t */
+# include <stdlib.h> /* EXIT_SUCCESS */
 
-# define SUCCESS 0
-# define ERROR 1
-# define ERROR_INT INT_MAX
+# define SUCCESS EXIT_SUCCESS
+# define ERROR EXIT_FAILURE
 
 typedef enum e_hand
 {
