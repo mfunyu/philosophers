@@ -6,13 +6,14 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:13:50 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:37:34 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/10/11 14:54:53 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "philo_struct.h"
 #include "threads.h"
+#include "error.h"
 #include <pthread.h>
 
 static int	_thread_start(void *(*func)(void *), t_info *info, t_th_type type)
