@@ -53,5 +53,6 @@ int	philosophers(int ac, char **av)
 	if (threads_start(info))
 		return (ERROR);
 	clean(shared);
+	free(info);
 	return (0);
 }
