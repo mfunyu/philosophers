@@ -12,8 +12,7 @@
 
 NAME	:= philo
 VPATH	:= ./srcs/ ./srcs/actions ./srcs/inits ./srcs/threads ./srcs/utils
-SRCS	:= main.c \
-		philosophers.c \
+SRCS	:= philosophers.c \
 		get_time_in_ms.c \
 		error_return.c \
 		is_eos.c \

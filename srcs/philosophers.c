@@ -37,7 +37,7 @@ static int	_check_args(const int ac, const char **av)
 	return (SUCCESS);
 }
 
-int	philosophers(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_shared	*shared;
 	t_info		*info;
