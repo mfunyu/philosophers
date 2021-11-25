@@ -6,12 +6,12 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/10/11 15:58:24 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/11/25 15:44:01 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= philo
-VPATH	:= ./srcs/
+VPATH	:= ./srcs/ ./srcs/actions ./srcs/inits ./srcs/threads ./srcs/utils
 SRCS	:= main.c \
 		philosophers.c \
 		get_time_in_ms.c \
@@ -20,22 +20,23 @@ SRCS	:= main.c \
 		print_timestamp_log.c \
 		clean.c \
 		msleep.c \
-		inits/init_t_shared.c \
-		inits/init_t_info.c \
-		inits/init_mutexes.c \
-		threads/threads_start.c \
-		threads/thread_philosopher.c \
-		threads/thread_monitor.c \
-		threads/thread_end_observer.c \
-		actions/action_drop_fork_and_sleep.c \
-		actions/action_take_forks_and_eat.c \
-		actions/action_think.c \
-		utils/ft_putstr_fd.c \
-		utils/ft_putendl_fd.c \
-		utils/ft_strlen.c \
-		utils/ft_atoi_check.c \
-		utils/ft_atoi.c
-OBJS	:= $(SRCS:%.c=$(VPATH)%.o)
+		init_t_shared.c \
+		init_t_info.c \
+		init_mutexes.c \
+		threads_start.c \
+		thread_philosopher.c \
+		thread_monitor.c \
+		thread_end_observer.c \
+		action_drop_fork_and_sleep.c \
+		action_take_forks_and_eat.c \
+		action_think.c \
+		ft_putstr_fd.c \
+		ft_putendl_fd.c \
+		ft_strlen.c \
+		ft_atoi_check.c \
+		ft_atoi.c
+OBJ_DIR := ./objs/
+OBJS	:= $(addprefix $(OBJ_DIR), $(SRCS:%.c=%.o))
 
 INCLUDES:= -I./includes
 TESTER	:= tester_philosophers
@@ -49,8 +50,14 @@ GFLAGS	:= $(CFLAGS) -fsanitize=address
 
 all	: $(NAME) ## Compile all
 
-$(NAME)	: $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+$(NAME)	: $(OBJ_DIR) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
+
+$(OBJ_DIR)%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	@- mkdir $@
 
 clean	: ## Remove object files
 	$(RM) $(OBJS)
