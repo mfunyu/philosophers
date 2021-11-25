@@ -6,12 +6,11 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/14 20:42:31 by mfunyu            #+#    #+#              #
-#    Updated: 2021/11/25 15:49:58 by mfunyu           ###   ########.fr        #
+#    Updated: 2021/11/25 18:05:58 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= philo
-VPATH	:= ./srcs/ ./srcs/actions ./srcs/inits ./srcs/threads ./srcs/utils
 SRCS	:= philosophers.c \
 		get_time_in_ms.c \
 		error_return.c \
@@ -34,6 +33,7 @@ SRCS	:= philosophers.c \
 		ft_strlen.c \
 		ft_atoi_check.c \
 		ft_atoi.c
+VPATH	:= srcs/ srcs/actions srcs/exit srcs/inits srcs/threads srcs/time srcs/utils
 OBJ_DIR := ./objs/
 OBJS	:= $(addprefix $(OBJ_DIR), $(SRCS:%.c=%.o))
 DEPS	:= $(OBJS:%.o=%.d)
