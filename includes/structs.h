@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_struct.h                                     :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 14:16:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:29:17 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:54:54 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_STRUCT_H
-# define PHILO_STRUCT_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 # include <stddef.h>
 # include <pthread.h>

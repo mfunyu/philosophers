@@ -6,11 +6,11 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:43:05 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/11/25 17:41:02 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:54:46 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_struct.h"
+#include "structs.h"
 #include "threads.h"
 #include "enums.h"
 #include <stddef.h>
