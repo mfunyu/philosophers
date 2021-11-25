@@ -6,12 +6,12 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 15:35:38 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:39:48 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
 #include "philo_struct.h"
+#include "enums.h"
 #include "exit.h"
 #include <stddef.h>
 #include <stdlib.h>

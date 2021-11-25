@@ -6,12 +6,12 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 08:41:57 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 15:30:07 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:40:30 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
 #include "philo_struct.h"
+#include "enums.h"
 #include <unistd.h>
 
 static int64_t	_get_time_passed(t_info *info, int mutex_id)

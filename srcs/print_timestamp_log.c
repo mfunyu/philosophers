@@ -6,12 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 16:00:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:59:10 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:38:19 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
 #include "philo_struct.h"
+#include "threads.h"
+#include "enums.h"
 #include "exit.h"
 #include <stdio.h>
 #include <pthread.h>

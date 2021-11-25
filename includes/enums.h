@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.h                                     :+:      :+:    :+:   */
+/*   enums.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/15 21:52:51 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:58:25 by mfunyu           ###   ########.fr       */
+/*   Created: 2021/11/25 17:42:48 by mfunyu            #+#    #+#             */
+/*   Updated: 2021/11/25 17:42:48 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_UTILS_H
-# define PHILO_UTILS_H
-
-# include <stdbool.h> /* bool */
-# include <inttypes.h> /* int64_t */
-# include <stdlib.h> /* EXIT_SUCCESS */
-
-# define SUCCESS EXIT_SUCCESS
-# define ERROR EXIT_FAILURE
+#ifndef ENUMS_H
+# define ENUMS_H
 
 typedef enum e_hand
 {
@@ -49,17 +42,5 @@ typedef enum e_mutex_type
 	PHILOMEAL,
 	TOTAL
 }			t_mutex_type;
-
-typedef struct s_shared	t_shared;
-typedef struct s_info	t_info;
-
-int		threads_start(t_info *info);
-
-bool	is_eos(t_info *info);
-int64_t	get_time_in_ms(void);
-int64_t	print_timestamp_log(t_info *info, t_action action);
-int		msleep(int64_t time_sleep_start, int msec);
-
-void	clean(t_shared *shared);
 
 #endif
