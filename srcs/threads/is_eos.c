@@ -6,13 +6,14 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 10:04:43 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:59:10 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:36:00 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
 #include "philo_struct.h"
+#include "enums.h"
 #include <pthread.h>
+#include <stdbool.h>
 
 bool	is_eos(t_info *info)
 {
