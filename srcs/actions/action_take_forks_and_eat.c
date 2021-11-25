@@ -12,6 +12,7 @@
 
 #include "philo_utils.h"
 #include "philo_struct.h"
+#include "exit.h"
 #include <unistd.h>
 
 static void	_set_ts_and_cnt_meal(t_info *info, int64_t timestamp, bool update)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "exit.h"
 #include <stddef.h>
 #include <sys/time.h>
 

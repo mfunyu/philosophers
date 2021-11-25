@@ -12,7 +12,7 @@
 
 #include "philo_utils.h"
 #include "philo_struct.h"
-#include "error.h"
+#include "exit.h"
 #include <stddef.h>
 #include <stdlib.h>
 

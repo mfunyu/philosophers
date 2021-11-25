@@ -6,14 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 15:40:47 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:39:27 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
 #include "philo_struct.h"
 #include "utils.h"
-#include "error.h"
+#include "exit.h"
 #include <string.h>
 #include <stdlib.h>
 

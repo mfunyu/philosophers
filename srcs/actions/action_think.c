@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
+#include "exit.h"
 
 int	action_think(t_info *info)
 {

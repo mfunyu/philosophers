@@ -12,6 +12,7 @@
 
 #include "philo_utils.h"
 #include "philo_struct.h"
+#include "exit.h"
 
 int	action_drop_fork_and_sleep(t_info *info)
 {

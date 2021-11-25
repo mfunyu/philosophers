@@ -6,13 +6,12 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 08:21:19 by mfunyu            #+#    #+#             */
-/*   Updated: 2021/10/11 14:59:10 by mfunyu           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:39:33 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_utils.h"
 #include "philo_struct.h"
-#include "error.h"
+#include "exit.h"
 #include <stdlib.h>
 
 int	init_t_info(t_info **info, t_shared *shared)

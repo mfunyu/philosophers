@@ -13,7 +13,7 @@
 #include "philo_utils.h"
 #include "utils.h"
 #include "inits.h"
-#include "error.h"
+#include "exit.h"
 
 static int	_check_args(const int ac, const char **av)
 {

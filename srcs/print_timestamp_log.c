@@ -12,6 +12,7 @@
 
 #include "philo_utils.h"
 #include "philo_struct.h"
+#include "exit.h"
 #include <stdio.h>
 #include <pthread.h>
 
